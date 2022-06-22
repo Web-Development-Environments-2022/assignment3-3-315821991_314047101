@@ -54,9 +54,11 @@ export default {
       // response = this.$route.params.response;
 
       try {
+        let recipe_id = this.$route.params.recipeId;
+        let str_id = recipe_id.toString();
         response = await this.axios.get(
           // "https://test-for-3-2.herokuapp.com/recipes/info",
-          this.$root.store.server_domain + "/recipes/info",
+          this.$root.store.server_domain + "/recipes/" + str_id,
           {
             params: { id: this.$route.params.recipeId }
           }
