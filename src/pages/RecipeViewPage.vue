@@ -52,29 +52,19 @@ export default {
     try {
       let response;
       // response = this.$route.params.response;
-
       try {
-        let recipe_id = this.$route.params.recipeId;
-        let str_id = recipe_id.toString();
         response = await this.axios.get(
-          // "https://test-for-3-2.herokuapp.com/recipes/info",
-          this.$root.store.server_domain + "/recipes/" + str_id,
-          {
-            params: { id: this.$route.params.recipeId }
-          }
-        );
-
-        // console.log("response.status", response.status);
+          this.$root.store.server_domain + "/recipes/ExpandeRecipeData?recipeID=" + this.$route.params.recipeID);
         if (response.status !== 200) this.$router.replace("/NotFound");
       } catch (error) {
         console.log("error.response.status", error.response.status);
         this.$router.replace("/NotFound");
         return;
       }
+      console.log(response);
 
       let {
         analyzedInstructions,
-        instructions,
         extendedIngredients,
         aggregateLikes,
         readyInMinutes,
@@ -90,7 +80,6 @@ export default {
         .reduce((a, b) => [...a, ...b], []);
 
       let _recipe = {
-        instructions,
         _instructions,
         analyzedInstructions,
         extendedIngredients,
