@@ -1,18 +1,36 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link :to="{ name: 'main' }">Vue Recipes</router-link>|
-      <router-link :to="{ name: 'search' }">Search</router-link>|
-      {{ !$root.store.username }}
-      <span v-if="!$root.store.username">
-        Guest:
-        <router-link :to="{ name: 'register' }">Register</router-link>|
-        <router-link :to="{ name: 'login' }">Login</router-link>|
-      </span>
-      <span v-else>
-        {{ $root.store.username }}: <button @click="Logout">Logout</button>|
-      </span>
-    </div>
+    <b-navbar toggleable="lg" class="navbar">
+      <img src="https://www.allrecipes.com/img/misc/og-default.png" width="220" height="100" >
+      <b-navbar-brand :to="{ name: 'main' }">Main</b-navbar-brand>
+      <b-collapse id="nav-collapse" is-nav>
+        <b-navbar-nav >
+        <b-nav-item :to="{ name: 'search' }">Search</b-nav-item>
+        <b-nav-item :to="{ name: 'about' }">About</b-nav-item>
+        </b-navbar-nav>
+        <b-navbar-nav class="ml-auto" v-if="!$root.store.username">
+          <b-nav-item :to="{ name: 'login' }">Login</b-nav-item>
+          <b-nav-item :to="{ name: 'register' }">Register</b-nav-item>
+          <b-navbar-brand >Hello Guest</b-navbar-brand>
+        </b-navbar-nav>
+        <b-navbar-nav class="ml-auto" v-else>
+           <b-nav-item-dropdown>
+          <template #button-content>Personal
+          </template>
+          <b-dropdown-item :to="{ name: 'favorites' }">Favorites</b-dropdown-item>
+          <b-dropdown-item :to="{ name: 'myRecipe' }">Private</b-dropdown-item>
+          <b-dropdown-item :to="{ name: 'familyRecipe' }">Family Recipe</b-dropdown-item>
+        </b-nav-item-dropdown>
+        <b-nav-item-dropdown right>
+          <template #button-content>
+            {{$root.store.username}}
+          </template>
+          <b-dropdown-item :to="{ name: 'profile' }">Profile</b-dropdown-item>
+          <b-dropdown-item href="#" @click="Logout()">Log Out</b-dropdown-item>
+        </b-nav-item-dropdown>
+        </b-navbar-nav>
+      </b-collapse>
+    </b-navbar>
     <router-view />
   </div>
 </template>
