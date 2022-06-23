@@ -50,19 +50,20 @@ export default {
   },
   async created() {
     try {
+      console.log("hi");
+      let recipe_id = this.$route.params.recipeId
+      console.log(recipe_id);
       let response;
       // response = this.$route.params.response;
       try {
         response = await this.axios.get(
-          this.$root.store.server_domain + "/recipes/ExpandeRecipeData?recipeID=" + this.$route.params.recipeID);
+          this.$root.store.server_domain + "/recipes/ExpandeRecipeData?recipeID=" + recipe_id, { withCredentials: true });
         if (response.status !== 200) this.$router.replace("/NotFound");
       } catch (error) {
         console.log("error.response.status", error.response.status);
         this.$router.replace("/NotFound");
         return;
       }
-      console.log(response);
-
       let {
         analyzedInstructions,
         extendedIngredients,
@@ -70,7 +71,7 @@ export default {
         readyInMinutes,
         image,
         title
-      } = response.data.recipe;
+      } = response.data;
 
       let _instructions = analyzedInstructions
         .map((fstep) => {
