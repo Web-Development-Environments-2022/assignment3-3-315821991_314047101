@@ -14,6 +14,8 @@
           <b-navbar-brand >Hello Guest</b-navbar-brand>
         </b-navbar-nav>
         <b-navbar-nav class="ml-auto" v-else>
+          <b-nav-item href="#" @click="addPersonalRecipe()">Create Recipe</b-nav-item>
+        
            <b-nav-item-dropdown>
           <template #button-content>Personal
           </template>
@@ -47,6 +49,18 @@ export default {
         this.$forceUpdate();
       });
     }
+,
+      addPersonalRecipe() {
+      this.$root.store.addPersonalRecipe;
+      this.$root.toast("creatRecipe", "User logged out successfully", "success");
+
+      this.$router.push("/").catch(() => {
+        this.$forceUpdate();
+      });
+    }
+
+
+
   }
 };
 </script>
