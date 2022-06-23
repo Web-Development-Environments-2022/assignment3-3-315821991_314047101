@@ -50,9 +50,7 @@ export default {
   },
   async created() {
     try {
-      console.log("hi");
       let recipe_id = this.$route.params.recipeId
-      console.log(recipe_id);
       let response;
       // response = this.$route.params.response;
       try {
