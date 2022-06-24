@@ -27,7 +27,6 @@
           <template #button-content>
             {{$root.store.username}}
           </template>
-          <b-dropdown-item :to="{ name: 'profile' }">Profile</b-dropdown-item>
           <b-dropdown-item href="#" @click="Logout()">Log Out</b-dropdown-item>
         </b-nav-item-dropdown>
         </b-navbar-nav>
@@ -41,11 +40,14 @@
 export default {
   name: "App",
   methods: {
-    Logout() {
-      this.$root.store.logout();
-      this.$root.toast("Logout", "User logged out successfully", "success");
-
-      this.$router.push("/").catch(() => {
+    async Logout() {
+      // try {
+        const response = await this.axios.post(
+          "http://localhost:3000/Logout"
+        );
+        this.$root.store.logout();
+        this.$root.toast("Logout", "User logged out successfully", "success");
+        this.$router.push("/").catch(() => {
         this.$forceUpdate();
       });
     }

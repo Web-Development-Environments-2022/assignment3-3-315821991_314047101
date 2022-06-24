@@ -29,7 +29,7 @@ export default {
         );
         for (const i in favoriteRecipes.data) {
           if (favoriteRecipes.data[i] != undefined) {
-            this.games.push(favoriteRecipes.data[i]);
+            this.recipe.push(favoriteRecipes.data[i]);
           }
         }
       } catch (err) {

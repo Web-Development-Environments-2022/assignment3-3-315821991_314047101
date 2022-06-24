@@ -70,7 +70,7 @@ export default {
         image,
         title
       } = response.data;
-
+      console.log(response)
       let _instructions = analyzedInstructions
         .map((fstep) => {
           fstep.steps[0].step = fstep.name + fstep.steps[0].step;

@@ -1,6 +1,6 @@
 <template>
 <div>
-  <div class="favorite">
+  <div class="favorites">
     Your Favorite Recipes:
     </div>
     <RecipePreview
