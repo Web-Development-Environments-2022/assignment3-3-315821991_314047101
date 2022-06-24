@@ -42,6 +42,7 @@ export default {
   methods: {
     async Logout() {
       // try {
+        console.log("ddddddd")
         const response = await this.axios.post(
           "http://localhost:3000/Logout"
         );
