@@ -14,13 +14,13 @@
           <b-navbar-brand >Hello Guest</b-navbar-brand>
         </b-navbar-nav>
         <b-navbar-nav class="ml-auto" v-else>
-          <b-nav-item href="#" @click="addPersonalRecipe()">Create Recipe</b-nav-item>
-        
+          <b-nav-item :to="{ name:'AddPersonalRecipes' }">Create Recipe</b-nav-item>
+          
            <b-nav-item-dropdown>
           <template #button-content>Personal
           </template>
           <b-dropdown-item :to="{ name: 'favorites' }">Favorites</b-dropdown-item>
-          <b-dropdown-item :to="{ name: 'myRecipe' }">Private</b-dropdown-item>
+          <b-dropdown-item :to="{ name: 'myRecipe' }">My Recipes</b-dropdown-item>
           <b-dropdown-item :to="{ name: 'familyRecipe' }">Family Recipe</b-dropdown-item>
         </b-nav-item-dropdown>
         <b-nav-item-dropdown right>
@@ -49,18 +49,6 @@ export default {
         this.$forceUpdate();
       });
     }
-,
-      addPersonalRecipe() {
-      this.$root.store.addPersonalRecipe;
-      this.$root.toast("creatRecipe", "User logged out successfully", "success");
-
-      this.$router.push("/").catch(() => {
-        this.$forceUpdate();
-      });
-    }
-
-
-
   }
 };
 </script>
