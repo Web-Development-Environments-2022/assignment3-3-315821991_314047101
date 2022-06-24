@@ -44,7 +44,7 @@ export default {
       // try {
         console.log("ddddddd")
         const response = await this.axios.post(
-          "http://localhost:3000/Logout"
+          this.$root.store.server_domain + "/Logout", { withCredentials: true },
         );
         this.$root.store.logout();
         this.$root.toast("Logout", "User logged out successfully", "success");

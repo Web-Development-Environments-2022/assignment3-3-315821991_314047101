@@ -2,6 +2,7 @@ import Vue from "vue";
 import App from "./App.vue";
 import VueAxios from "vue-axios";
 import axios from "axios";
+axios.defaults.withCredentials = true;
 
 import routes from "./routes";
 import VueRouter from "vue-router";
@@ -76,6 +77,7 @@ const shared_data = {
     console.log("login", this.username);
   },
   logout() {
+    console.log("ttttttt")
     console.log("logout");
     localStorage.removeItem("username");
     this.username = undefined;
