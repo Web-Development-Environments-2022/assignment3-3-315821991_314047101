@@ -68,21 +68,16 @@ Vue.config.productionTip = false;
 
 const shared_data = {
   username: localStorage.username,
-  userPermission: localStorage.userPermission,
   server_domain: "http://localhost:3000",
-  login(username, userPermission) {
+  login(username) {
     localStorage.setItem("username", username);
     this.username = username;
-    localStorage.setItem("userPermission", userPermission);
-    this.userPermission = userPermission;
-    console.log("login", this.username, this.userPermission);
+    console.log("login", this.username);
   },
   logout() {
     console.log("logout");
     localStorage.removeItem("username");
     this.username = undefined;
-    localStorage.removeItem("userPermission");
-    this.userPermission = undefined;
   },
 };
 console.log(shared_data);
