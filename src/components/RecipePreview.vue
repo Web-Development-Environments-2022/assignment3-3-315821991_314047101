@@ -7,11 +7,11 @@
       <!-- <img v-if="image_load" :src="recipe.image" class="recipe-image" /> -->
       <!-- todo check error -->
     
-      <img :src="recipe.image" class="recipe-image" />
+      <img style="width: 270px; height:173px;" :src="recipe.image" class="recipe-image"  />
            
     </div>
-    <div class="recipe-footer">
-      <div :title="recipe.title" class="recipe-title">
+    <div style="text-align:center" class="recipe-footer">
+      <div style="text-align:center" :title="recipe.title" class="recipe-title">
       {{ recipe.title }}
       </div>
       <ul class="recipe-overview">

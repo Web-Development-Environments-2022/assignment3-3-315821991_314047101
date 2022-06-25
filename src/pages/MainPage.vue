@@ -2,7 +2,7 @@
   <div class="container">
     <h1 class="title">Main Page</h1>
     <h2 class="subTitles">
-      <RecipePreviewList title="Randome Recipes" class="RandomRecipes center" />
+      <RecipePreviewList title="Explore this recipes" class="RandomRecipes center" />
     
     <!-- {{ !$root.store.username }} -->
 
@@ -11,21 +11,15 @@
    <div>
     <h2 class="subTitles">
       <router-link v-if="!$root.store.username" to="/login" tag="button">You need to Login to view this</router-link>
-      <RecipePreviewList
-    
-      title="Last Viewed Recipes"
-      :class="{
-        RandomRecipes: true,
-        blur: !$root.store.username,
-        center: true
-      }"
-      disabled
-    ></RecipePreviewList>
-
-
-
+       <b-container>
+          <h1   class="title">Last Viewed Recipes</h1>
+              <b-row >
+                <b-col v-for="r in recipes" :key="r.id" >
+                  <RecipePreview  style="width: 270px; height:273px" class="recipePreview" :recipe="r" />
+                </b-col>
+              </b-row>
+      </b-container>
     </h2>
-    
    </div>
 
       
@@ -42,9 +36,39 @@
 
 <script>
 import RecipePreviewList from "../components/RecipePreviewList";
+import RecipePreview from "../components/RecipePreview.vue";
 export default {
   components: {
-    RecipePreviewList
+    RecipePreviewList,
+    RecipePreview
+   },
+  props: {
+    title: {
+      type: String,
+      required: true
+    }
+  },
+  data() {
+    return {
+      recipes: []
+    };
+  },
+  mounted() {
+    this.LastThreeViewes();
+  },
+  methods: {
+    async LastThreeViewes() {
+      try {
+        const response = await this.axios.get(
+          this.$root.store.server_domain + "/recipes/getThreeLastViewedRecipes", { withCredentials: true }
+        );
+        const recipes = response.data;
+        this.recipes = [];
+        this.recipes.push(...recipes);
+      } catch (error) {
+        console.log(error);
+      }
+    }
   }
 };
 </script>

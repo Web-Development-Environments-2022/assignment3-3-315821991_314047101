@@ -6,13 +6,14 @@
     </h3>
     <b-row>
       <b-col v-for="r in recipes" :key="r.id">
-        <RecipePreview class="recipePreview" :recipe="r" />
+        <RecipePreview style="width: 270px; height:273px; text-align:center;"  class="recipePreview" :recipe="r" />
       </b-col>
     </b-row>
   </b-container>
 </template>
 
 <script>
+import { thistle } from "color-name";
 import RecipePreview from "./RecipePreview.vue";
 export default {
   name: "RecipePreviewList",
@@ -57,5 +58,13 @@ export default {
 <style lang="scss" scoped>
 .container {
   min-height: 400px;
+}
+h3
+{
+    text-align:center; 
+    color: rgb(182, 99, 22);
+    font-family:'Gill Sans', 'Gill Sans MT';
+    background-color: rgb(245, 234, 212);
+    padding: 20px;
 }
 </style>

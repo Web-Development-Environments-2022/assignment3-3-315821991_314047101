@@ -15,8 +15,8 @@
   <b-container>
  <h1 class="title">Favorite Recipes</h1>
     <b-row>
-      <b-col v-for="r in recipes" :key="r.id">
-        <RecipePreview class="recipePreview" :recipe="r" />
+      <b-col v-for="r in recipes" :key="r.id" >
+        <RecipePreview  class="recipePreview" :recipe="r" />
       </b-col>
     </b-row>
   </b-container>
@@ -67,6 +67,7 @@ export default {
 <style lang="scss" scoped>
 .container {
   min-height: 400px;
+  background-color: rgb(245, 234, 212);
 }
 
 h1{
