@@ -1,12 +1,14 @@
 <template>
   <router-link
     :to="{ name: 'recipe', params: { recipeId: recipe.id } }"
-    class="recipe-preview"
-  >
+    class="recipe-preview">
+    
     <div class="recipe-body">
       <!-- <img v-if="image_load" :src="recipe.image" class="recipe-image" /> -->
       <!-- todo check error -->
+    
       <img :src="recipe.image" class="recipe-image" />
+           
     </div>
     <div class="recipe-footer">
       <div :title="recipe.title" class="recipe-title">
@@ -17,6 +19,7 @@
         <li>{{ recipe.aggregateLikes }} likes</li>
       </ul>
     </div>
+
   </router-link>
 </template>
 
@@ -33,39 +36,41 @@ export default {
     };
   },
   props: {
-    // recipe: {
-    //   type: Object,
-    //   required: true
-    // }
-
-    id: {
-      type: Number,
+    recipe: {
+      type: Object,
       required: true
-    },
-    title: {
-      type: String,
-      required: true
-    },
-    readyInMinutes: {
-      type: Number,
-      required: true
-    },
-    image: {
-      type: String,
-      required: true
-    },
-    aggregateLikes: {
-      type: Number,
-      required: false,
-      default() {
-        return undefined;
-      }
     }
+
+    // id: {
+    //   type: Number,
+    //   required: true
+    // },
+    // title: {
+    //   type: String,
+    //   required: true
+    // },
+    // readyInMinutes: {
+    //   type: Number,
+    //   required: true
+    // },
+    // image: {
+    //   type: String,
+    //   required: true
+    // },
+    // aggregateLikes: {
+    //   type: Number,
+    //   required: false,
+    //   default() {
+    //     return undefined;
+    //   }
+   // }
   }
 };
 </script>
 
 <style scoped>
+
+
 .recipe-preview {
   display: inline-block;
   width: 90%;
@@ -77,6 +82,10 @@ export default {
   width: 100%;
   height: 200px;
   position: relative;
+}
+.recipe-image{
+  width: 50%;
+  height: 60px;
 }
 
 .recipe-preview .recipe-body .recipe-image {
@@ -98,7 +107,7 @@ export default {
   overflow: hidden;
 }
 
-.recipe-preview .recipe-footer .recipe-title {
+li{
   padding: 10px 10px;
   width: 100%;
   font-size: 12pt;
@@ -107,6 +116,19 @@ export default {
   overflow: hidden;
   -o-text-overflow: ellipsis;
   text-overflow: ellipsis;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.recipe-preview .recipe-footer .recipe-title {
+  padding: 10px 10px;
+  width: 100%;
+  font-size: 15pt;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
 .recipe-preview .recipe-footer ul.recipe-overview {
