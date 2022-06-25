@@ -20,7 +20,7 @@
           <template #button-content>Personal
           </template>
           <b-dropdown-item :to="{ name: 'favorites' }">Favorites</b-dropdown-item>
-          <b-dropdown-item :to="{ name: 'myRecipe' }">My Recipes</b-dropdown-item>
+          <b-dropdown-item :to="{ name: 'personalRecipes' }">My Recipes</b-dropdown-item>
           <b-dropdown-item :to="{ name: 'familyRecipe' }">Family Recipe</b-dropdown-item>
         </b-nav-item-dropdown>
         <b-nav-item-dropdown right>

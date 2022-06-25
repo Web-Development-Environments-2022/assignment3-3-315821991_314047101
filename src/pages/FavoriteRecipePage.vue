@@ -1,5 +1,3 @@
-
-
 <template>
   <b-container>
  <h1 class="title">Favorite Recipes</h1>
