@@ -1,7 +1,11 @@
 <template>
-  <div class="container">
-    <h1>Four Oh Four you didn't</h1>
-    <router-link to="/" exact>ET Go Home</router-link>
+  <div>
+    <div class="container" id="not_found_page">
+      <br><br><br><br><br><br>
+      <h1>Sorry, we can't find this page</h1>
+      <br><br><br><br><br><br>
+    </div>
+      <router-link to="/" exact id="backhome">Back to Home</router-link>
   </div>
 </template>
 <style>
@@ -13,4 +17,15 @@ h1{
     padding: 20px;
 }
 
+#not_found_page
+{
+ background-image: url("../assets/diy-food-photography-backgrounds.jpg");
+}
+
+#backhome
+{
+  display: block;
+  text-align: center;
+  color: black;
+}
 </style>
