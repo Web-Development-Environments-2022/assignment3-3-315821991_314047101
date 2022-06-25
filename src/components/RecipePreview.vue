@@ -3,25 +3,8 @@
     :to="{ name: 'recipe', params: { recipeId: recipe.id } }"
     class="recipe-preview">
     
-    <div class="recipe-body">
-      <!-- <img v-if="image_load" :src="recipe.image" class="recipe-image" /> -->
-      <!-- todo check error -->
-      <!-- <ul  class="recipe-image">
-         <li v-if="recipe.image==undefined || recipe.image=='undefined' ">
-          <img style="width: 270px; height:173px;" src="https://spoonacular.com/recipeImages/2222-556x370.jpg"  />
-      
-
-      </li>
-      <li v-else>   
-        <img style="width: 270px; height:173px;" :src="recipe.image"  />
-       
-      </li>
-
-      </ul> -->
-     
+    <div class="recipe-body">   
        <img style="width: 270px; height:173px;" :src="recipe.image"  />
-   
-           
     </div>
     <div style="text-align:center" class="recipe-footer">
       <div style="text-align:center" :title="recipe.title" class="recipe-title">
@@ -32,15 +15,9 @@
         <li>{{ recipe.aggregateLikes }} likes</li>
       </ul>
       <ul class="recipe-overview">
-        <li v-if="recipe.vegetarian">
-            <img src="../assets/vegetarian_icon.png" width="25" height="25" >
-        </li>
-        <li v-if="recipe.vegan">
-            <img src="../assets/vegan_icon.png" width="25" height="25" >
-        </li>
-        <li v-if="recipe.glutenFree">
-            <img src="../assets/gluten_free_icon.png" width="25" height="25" >
-        </li>
+                  <img v-if="recipe.vegetarian" src="../assets/vegetarian_icon.png" width="25" height="25" >
+                  <img v-if="recipe.vegan" src="../assets/vegan_icon.png" width="25" height="25" >
+                  <img v-if="recipe.glutenFree" src="../assets/gluten_free_icon.png" width="25" height="25" >
       </ul>
     </div>
 
