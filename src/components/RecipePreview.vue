@@ -20,13 +20,13 @@
       </ul>
       <ul class="recipe-overview">
         <li v-if="recipe.vegetarian">
-            <img src="../assets/vegetarian_icon.jpg" width="25" height="25" >
+            <img src="../assets/vegetarian_icon.png" width="25" height="25" >
         </li>
         <li v-if="recipe.vegan">
-            <img src="../assets/vegan_icon.jpg" width="25" height="25" >
+            <img src="../assets/vegan_icon.png" width="25" height="25" >
         </li>
         <li v-if="recipe.glutenFree">
-            <img src="../assets/gluten_free_icon.jpg" width="25" height="25" >
+            <img src="../assets/gluten_free_icon.png" width="25" height="25" >
         </li>
       </ul>
     </div>

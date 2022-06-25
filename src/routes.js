@@ -40,7 +40,7 @@ const routes = [
   {
     path: "/users/add_personal_recipe",
     name: "addPersonalRecipes",
-    component: () => import("./pages/addPersonalRecipePage"),
+    component: () => import("./pages/AddPersonalRecipePage"),
   },
 
 
