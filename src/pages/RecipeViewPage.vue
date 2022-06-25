@@ -11,6 +11,7 @@
             <div class="mb-3">
               <div>Ready in {{ recipe.readyInMinutes }} minutes</div>
               <div>Likes: {{ recipe.aggregateLikes }} likes</div>
+              <div>Number of servings: {{ recipe.servings }}</div>
             </div>
             Ingredients:
             <ul>
@@ -23,6 +24,12 @@
             </ul>
           </div>
           <div class="wrapped">
+              <div class="nutrition_signs">
+                  <img v-if="recipe.vegetarian" src="../assets/vegetarian_icon.png" width="25" height="25" >
+                  <img v-if="recipe.vegan" src="../assets/vegan_icon.png" width="25" height="25" >
+                  <img v-if="recipe.glutenFree" src="../assets/gluten_free_icon.png" width="25" height="25" >
+              </div>
+            <br>
             Instructions:
             <ol>
               <li v-for="s in recipe._instructions" :key="s.number">
@@ -68,7 +75,11 @@ export default {
         aggregateLikes,
         readyInMinutes,
         image,
-        title
+        title,
+        vegan,
+        vegetarian,
+        glutenFree,
+        servings
       } = response.data;
       console.log(response)
       let _instructions = analyzedInstructions
@@ -85,7 +96,11 @@ export default {
         aggregateLikes,
         readyInMinutes,
         image,
-        title
+        title,
+        vegan,
+        vegetarian,
+        glutenFree,
+        servings
       };
 
       this.recipe = _recipe;

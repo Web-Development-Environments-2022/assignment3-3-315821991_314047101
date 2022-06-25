@@ -17,15 +17,9 @@
         <li>{{ recipe.aggregateLikes }} likes</li>
       </ul>
       <ul class="recipe-overview">
-        <li v-if="recipe.vegetarian">
-            <img src="../assets/vegetarian_icon.png" width="25" height="25" >
-        </li>
-        <li v-if="recipe.vegan">
-            <img src="../assets/vegan_icon.png" width="25" height="25" >
-        </li>
-        <li v-if="recipe.glutenFree">
-            <img src="../assets/gluten_free_icon.png" width="25" height="25" >
-        </li>
+                  <img v-if="recipe.vegetarian" src="../assets/vegetarian_icon.png" width="25" height="25" >
+                  <img v-if="recipe.vegan" src="../assets/vegan_icon.png" width="25" height="25" >
+                  <img v-if="recipe.glutenFree" src="../assets/gluten_free_icon.png" width="25" height="25" >
       </ul>
     </div>
 
