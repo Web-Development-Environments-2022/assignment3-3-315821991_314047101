@@ -3,7 +3,7 @@
     :to="{ name: 'recipe', params: { recipeId: recipe.id } }"
     class="recipe-preview">
     
-    <div class="recipe-body">
+     <div style="text-align:center"  class="recipe-body">
       <!-- <img v-if="image_load" :src="recipe.image" class="recipe-image" /> -->
       <!-- todo check error -->
       <!-- <ul  class="recipe-image">
@@ -19,7 +19,7 @@
 
       </ul> -->
      
-       <img style="width: 270px; height:173px;" :src="recipe.image"  />
+       <img style="width: 270px; height:173px;" :src="recipe.image"   />
    
            
     </div>
