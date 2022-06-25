@@ -3,9 +3,6 @@
     <h1 class="title">Main Page</h1>
     <h2 class="subTitles">
       <RecipePreviewList title="Explore this recipes" class="RandomRecipes center" />
-    
-    <!-- {{ !$root.store.username }} -->
-
     </h2>
     
    <div>
@@ -13,6 +10,9 @@
       <router-link v-if="!$root.store.username" to="/login" tag="button">You need to Login to view this</router-link>
        <b-container>
           <h1   class="title">Last Viewed Recipes</h1>
+                <div v-if="recipes.length==0" class="center_div">
+                    You have not yet viewed any recipes on our website...
+                </div>
               <b-row >
                 <b-col v-for="r in recipes" :key="r.id" >
                   <RecipePreview  style="width: 270px; height:273px" class="recipePreview" :recipe="r" />
@@ -21,16 +21,6 @@
       </b-container>
     </h2>
    </div>
-
-      
-
-
-    
-    <!-- <div
-      style="position: absolute;top: 70%;left: 50%;transform: translate(-50%, -50%);"
-    >
-      Centeredasdasdad
-    </div> -->
   </div>
 </template>
 
@@ -101,5 +91,11 @@ h2
     font-family:'Gill Sans', 'Gill Sans MT';
     background-color: rgb(245, 234, 212);
     padding: 20px;
+}
+
+.center_div {
+  display: flex;
+  justify-content: center;
+  font-size: 20px;
 }
 </style>
