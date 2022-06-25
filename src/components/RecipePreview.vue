@@ -12,11 +12,22 @@
     </div>
     <div class="recipe-footer">
       <div :title="recipe.title" class="recipe-title">
-        {{ recipe.title }}
+      {{ recipe.title }}
       </div>
       <ul class="recipe-overview">
         <li>{{ recipe.readyInMinutes }} minutes</li>
         <li>{{ recipe.aggregateLikes }} likes</li>
+      </ul>
+      <ul class="recipe-overview">
+        <li v-if="recipe.vegetarian">
+            <img src="../assets/vegetarian_icon.jpg" width="25" height="25" >
+        </li>
+        <li v-if="recipe.vegan">
+            <img src="../assets/vegan_icon.jpg" width="25" height="25" >
+        </li>
+        <li v-if="recipe.glutenFree">
+            <img src="../assets/gluten_free_icon.jpg" width="25" height="25" >
+        </li>
       </ul>
     </div>
 
