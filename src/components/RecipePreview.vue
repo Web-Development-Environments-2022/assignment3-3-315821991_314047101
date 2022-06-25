@@ -3,22 +3,7 @@
     :to="{ name: 'recipe', params: { recipeId: recipe.id } }"
     class="recipe-preview">
     
-     <div style="text-align:center"  class="recipe-body">
-      <!-- <img v-if="image_load" :src="recipe.image" class="recipe-image" /> -->
-      <!-- todo check error -->
-      <!-- <ul  class="recipe-image">
-         <li v-if="recipe.image==undefined || recipe.image=='undefined' ">
-          <img style="width: 270px; height:173px;" src="https://spoonacular.com/recipeImages/2222-556x370.jpg"  />
-      
-
-      </li>
-      <li v-else>   
-        <img style="width: 270px; height:173px;" :src="recipe.image"  />
-       
-      </li>
-
-      </ul> -->
-     
+     <div style="text-align:center"  class="recipe-body">  
        <img style="width: 270px; height:173px;" :src="recipe.image"   />
    
            
