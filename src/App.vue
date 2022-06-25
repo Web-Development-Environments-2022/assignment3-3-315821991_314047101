@@ -42,7 +42,6 @@ export default {
   methods: {
     async Logout() {
       // try {
-        console.log("ddddddd")
         const response = await this.axios.post(
           this.$root.store.server_domain + "/Logout", { withCredentials: true },
         );

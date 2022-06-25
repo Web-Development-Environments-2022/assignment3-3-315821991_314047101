@@ -1,14 +1,3 @@
-<!-- <template>
-
-  <div>
-    <h1 class="title">Favorite Games</h1>
-    <br/><br/>
-
-    <FavoriteRecipes v-bind:recipe="recipe"></FavoriteRecipes>
-
-  </div>
-
-</template> -->
 
 
 <template>
