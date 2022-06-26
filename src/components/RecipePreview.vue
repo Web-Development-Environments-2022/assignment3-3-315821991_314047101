@@ -1,6 +1,5 @@
 <template>
-  <div>
-  <router-link v-if="recipe.id>0" :to="{ name: 'recipe', params: { recipeId: recipe.id } }" class="recipe-preview">
+  <router-link :to="{ name: 'recipe', params: { recipeId: recipe.id } }" class="recipe-preview">
      <div style="text-align:center"  class="recipe-body">  
        <img style="width: 270px; height:173px;" :src="recipe.image"   />
            
@@ -14,39 +13,14 @@
         <li>{{ recipe.aggregateLikes }} likes</li>
       </ul>
       <ul class="recipe-overview">
-        <img v-if="!flag" @click="FavoriteChange" class="favorite_button" src="../assets/not_favorite_icon.png" width="25" height="25" >
-        <img v-if="flag"  @click="FavoriteChange" class="favorite_button" src="../assets/favorite_icon.png" width="25" height="25" >
-        <img v-if="recipe.vegetarian" src="../assets/vegetarian_icon.png" width="25" height="25" >
-        <img v-if="recipe.vegan" src="../assets/vegan_icon.png" width="25" height="25" >
-        <img v-if="recipe.glutenFree" src="../assets/gluten_free_icon.png" width="25" height="25" >
-      </ul>
-    </div>
-
-  </router-link>
-    <router-link v-if="recipe.id<0" :to="{ name: 'personal_recipe_view', params: { recipeId: recipe.id } }" class="recipe-preview">
-     <div style="text-align:center"  class="recipe-body">  
-       <img style="width: 270px; height:173px;" :src="recipe.image"   />
-           
-    </div>
-    <div style="text-align:center" class="recipe-footer">
-      <div style="text-align:center" :title="recipe.title" class="recipe-title">
-      {{ recipe.title }}
-      </div>
-      <ul class="recipe-overview">
-        <li>{{ recipe.readyInMinutes }} minutes</li>
-        <li>{{ recipe.aggregateLikes }} likes</li>
-      </ul>
-      <ul class="recipe-overview">
-        <img v-if="!flag" @click="FavoriteChange" class="favorite_button" src="../assets/not_favorite_icon.png" width="25" height="25" >
-        <img v-if="flag"  @click="FavoriteChange" class="favorite_button" src="../assets/favorite_icon.png" width="25" height="25" >
+        <img v-if="!flag" class="favorite_button" src="../assets/not_favorite_icon.png" width="25" height="25" >
+        <img v-if="flag" class="favorite_button" src="../assets/favorite_icon.png" width="25" height="25" >
         <img v-if="recipe.vegetarian" src="../assets/vegetarian_icon.png" width="25" height="25" >
         <img v-if="recipe.vegan" src="../assets/vegan_icon.png" width="25" height="25" >
         <img v-if="recipe.glutenFree" src="../assets/gluten_free_icon.png" width="25" height="25" >
       </ul>
     </div>
   </router-link>
-    </div>
-
 </template>
 
 <script>
@@ -68,12 +42,12 @@ export default {
       type: Object,
       required: true
     },
-      methods: {
-    async FavoriteChange() {
-      console.log(this.flag);
-      // todo - need to finish
-    }
-  }
+    //   methods: {
+    // async FavoriteChange() {
+    //   console.log(this.flag);
+    //   // todo - need to finish
+    // }
+  //}
   },
   async created() {
     let recipe_id = this.recipe.id

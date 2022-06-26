@@ -15,11 +15,11 @@
             </div>
             Ingredients:
             <ul>
-              <li
+              <!-- <li
                 v-for="(r, index) in recipe.extendedIngredients.split(',')"
                 :key="index + '_' + r">
                 {{ r }}
-              </li>
+              </li> -->
             </ul>
           </div>
           <div class="wrapped">
@@ -34,11 +34,11 @@
               </div>
             <br>
             Instructions:
-            <ol>
+            <!-- <ol>
               <li v-for="(s, index) in recipe.analyzedInstructions.split(',')" :key="index + '_' + s">
                 {{ s }}
               </li>
-            </ol>
+            </ol> -->
           </div>
         </div>
       </div>
@@ -56,7 +56,11 @@ export default {
   },
   async created() {
     try {
-      let recipe_id = this.$route.params.recipeId
+      // let recipe_id = this.$route.params.recipeId
+      //       console.log("hrre");
+
+      // console.log(recipe_id);
+      // console.log("hrre");
       let response;
       try {
         response = await this.axios.get(
@@ -79,7 +83,6 @@ export default {
         glutenFree,
         servings
       } = response.data;
-
         let _recipe = {
         analyzedInstructions,
         extendedIngredients,
@@ -127,7 +130,4 @@ h1{
   cursor: pointer;
 }
 
-/* .recipe-header{
-
-} */
 </style>
