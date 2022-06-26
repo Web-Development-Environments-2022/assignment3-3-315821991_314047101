@@ -1,11 +1,7 @@
 <template>
-  <router-link
-    :to="{ name: 'recipe', params: { recipeId: recipe.id } }"
-    class="recipe-preview">
-    
+  <router-link :to="{ name: path_name, params: { recipeId: recipe.id } }" class="recipe-preview">
      <div style="text-align:center"  class="recipe-body">  
        <img style="width: 270px; height:173px;" :src="recipe.image"   />
-   
            
     </div>
     <div style="text-align:center" class="recipe-footer">
@@ -17,56 +13,69 @@
         <li>{{ recipe.aggregateLikes }} likes</li>
       </ul>
       <ul class="recipe-overview">
-                  <img v-if="recipe.vegetarian" src="../assets/vegetarian_icon.png" width="25" height="25" >
-                  <img v-if="recipe.vegan" src="../assets/vegan_icon.png" width="25" height="25" >
-                  <img v-if="recipe.glutenFree" src="../assets/gluten_free_icon.png" width="25" height="25" >
+        <img v-if="!flag" class="favorite_button" src="../assets/not_favorite_icon.png" width="25" height="25" >
+        <img v-if="flag" class="favorite_button" src="../assets/favorite_icon.png" width="25" height="25" >
+        <img v-if="recipe.vegetarian" src="../assets/vegetarian_icon.png" width="25" height="25" >
+        <img v-if="recipe.vegan" src="../assets/vegan_icon.png" width="25" height="25" >
+        <img v-if="recipe.glutenFree" src="../assets/gluten_free_icon.png" width="25" height="25" >
       </ul>
     </div>
-
   </router-link>
 </template>
 
 <script>
 export default {
   mounted() {
+    //console.log(this.recipe.id);
     this.axios.get(this.recipe.image).then((i) => {
           this.image_load = true;
     });
   },
   data() {
     return {
+      path_name:'recipe',
       image_load: false,
+      flag: false
     };
   },
   props: {
     recipe: {
       type: Object,
       required: true
+    },
+    //   methods: {
+    // async FavoriteChange() {
+    //   console.log(this.flag);
+    //   // todo - need to finish
+    // }
+  //}
+  },
+  async created() {
+    let recipe_id = this.recipe.id
+    if(recipe_id < 0)
+    {
+      this.path_name = 'personal_recipe_view';
     }
-
-    // id: {
-    //   type: Number,
-    //   required: true
-    // },
-    // title: {
-    //   type: String,
-    //   required: true
-    // },
-    // readyInMinutes: {
-    //   type: Number,
-    //   required: true
-    // },
-    // image: {
-    //   type: String,
-    //   required: true
-    // },
-    // aggregateLikes: {
-    //   type: Number,
-    //   required: false,
-    //   default() {
-    //     return undefined;
-    //   }
-   // }
+    try {
+      let favorite_response;
+      try {
+        favorite_response = await this.axios.get(
+          this.$root.store.server_domain + "/users/get_favorites_ids", { withCredentials: true });
+        if (favorite_response.status !== 200) this.$router.replace("/NotFound");
+      } catch (error) {
+        console.log("error.favorite_response.status", error.favorite_response.status);
+        this.$router.replace("/NotFound");
+        return;
+      }
+      for (let i = 0; i < favorite_response.data.length; i++) {
+        if(favorite_response.data[i] == recipe_id)
+        {
+          this.flag = true;
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
   }
 };
 </script>
@@ -151,6 +160,11 @@ li{
   flex: 1 auto;
   table-layout: fixed;
   margin-bottom: 0px;
+}
+
+.favorite_button
+{
+  cursor: pointer;
 }
 
 .recipe-preview .recipe-footer ul.recipe-overview li {

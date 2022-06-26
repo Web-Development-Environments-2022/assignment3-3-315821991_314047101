@@ -15,39 +15,33 @@
             </div>
             Ingredients:
             <ul>
-              <li
-                v-for="(r, index) in recipe.extendedIngredients"
-                :key="index + '_' + r.id"
-              >
-                {{ r.original }}
-              </li>
+              <!-- <li
+                v-for="(r, index) in recipe.extendedIngredients.split(',')"
+                :key="index + '_' + r">
+                {{ r }}
+              </li> -->
             </ul>
           </div>
           <div class="wrapped">
               <div class="nutrition_signs">
-                <div class="favorite_button" @click="FavoriteChange"> 
+                <!-- <div class="favorite_button" @click="FavoriteChange"> 
                 <img v-if="!flag" src="../assets/not_favorite_icon.png" width="25" height="25" >
                 <img v-if="flag" src="../assets/favorite_icon.png" width="25" height="25" >
-                </div>
+                </div> -->
                   <img v-if="recipe.vegetarian" src="../assets/vegetarian_icon.png" width="25" height="25" >
                   <img v-if="recipe.vegan" src="../assets/vegan_icon.png" width="25" height="25" >
                   <img v-if="recipe.glutenFree" src="../assets/gluten_free_icon.png" width="25" height="25" >
               </div>
             <br>
             Instructions:
-            <ol>
-              <li v-for="s in recipe._instructions" :key="s.number">
-                {{ s.step }}
+            <!-- <ol>
+              <li v-for="(s, index) in recipe.analyzedInstructions.split(',')" :key="index + '_' + s">
+                {{ s }}
               </li>
-            </ol>
+            </ol> -->
           </div>
         </div>
       </div>
-      <!-- <pre>
-      {{ $route.params }}
-      {{ recipe }}
-    </pre
-      > -->
     </div>
   </div>
 </template>
@@ -60,62 +54,14 @@ export default {
       flag: false
     };
   },
-  methods: {
-    async FavoriteChange() {
-      let recipe_id = this.$route.params.recipeId
-      let response;
-      if(this.flag){
-        this.flag = false;
-        try {          
-            response = await this.axios.delete(
-          this.$root.store.server_domain +"/users/favorite",
-          { withCredentials: true , data:{
-            recipeId: recipe_id
-          }},
-        );
-        } catch (error) {
-          console.log("error.response.status", error.response.status);
-          return;
-        }
-      }
-      else{
-        this.flag = true;
-        try {        
-            response = await this.axios.post(
-            this.$root.store.server_domain +"/users/favorites",
-                      {
-            recipeId: recipe_id
-
-          }
-        );
-        } catch (error) {
-          console.log("error.response.status", error.response.status);
-          return;
-        }
-  
-      }
-    }
-  },
   async created() {
     try {
       let recipe_id = this.$route.params.recipeId
+      //       console.log("hrre");
+
+      // console.log(recipe_id);
+      // console.log("hrre");
       let response;
-      let favorite_response;
-      try {
-        favorite_response = await this.axios.get(
-          this.$root.store.server_domain + "/users/get_favorites_ids", { withCredentials: true });
-        if (favorite_response.status !== 200) this.$router.replace("/NotFound");
-      } catch (error) {
-        console.log("error.favorite_response.status", error.favorite_response.status);
-        this.$router.replace("/NotFound");
-        return;
-      }
-      for (let i = 0; i < favorite_response.data.length; i++) {
-        if(favorite_response.data[i] == recipe_id)
-        {
-          this.flag = true;
-        }
-      }
       try {
         response = await this.axios.get(
           this.$root.store.server_domain + "/recipes/ExpandeRecipeData?recipeID=" + recipe_id, { withCredentials: true });
@@ -137,16 +83,7 @@ export default {
         glutenFree,
         servings
       } = response.data;
-      console.log(response)
-      let _instructions = analyzedInstructions
-        .map((fstep) => {
-          fstep.steps[0].step = fstep.name + fstep.steps[0].step;
-          return fstep.steps;
-        })
-        .reduce((a, b) => [...a, ...b], []);
-
-      let _recipe = {
-        _instructions,
+        let _recipe = {
         analyzedInstructions,
         extendedIngredients,
         aggregateLikes,
@@ -193,7 +130,4 @@ h1{
   cursor: pointer;
 }
 
-/* .recipe-header{
-
-} */
 </style>
