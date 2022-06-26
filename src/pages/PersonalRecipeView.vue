@@ -15,30 +15,30 @@
             </div>
             Ingredients:
             <ul>
-              <!-- <li
+              <li
                 v-for="(r, index) in recipe.extendedIngredients.split(',')"
                 :key="index + '_' + r">
                 {{ r }}
-              </li> -->
+              </li>
             </ul>
           </div>
           <div class="wrapped">
               <div class="nutrition_signs">
-                <!-- <div class="favorite_button" @click="FavoriteChange"> 
+                <div class="favorite_button" @click="FavoriteChange"> 
                 <img v-if="!flag" src="../assets/not_favorite_icon.png" width="25" height="25" >
                 <img v-if="flag" src="../assets/favorite_icon.png" width="25" height="25" >
-                </div> -->
+                </div>
                   <img v-if="recipe.vegetarian" src="../assets/vegetarian_icon.png" width="25" height="25" >
                   <img v-if="recipe.vegan" src="../assets/vegan_icon.png" width="25" height="25" >
                   <img v-if="recipe.glutenFree" src="../assets/gluten_free_icon.png" width="25" height="25" >
               </div>
             <br>
             Instructions:
-            <!-- <ol>
+            <ol>
               <li v-for="(s, index) in recipe.analyzedInstructions.split(',')" :key="index + '_' + s">
                 {{ s }}
               </li>
-            </ol> -->
+            </ol>
           </div>
         </div>
       </div>
@@ -57,10 +57,6 @@ export default {
   async created() {
     try {
       let recipe_id = this.$route.params.recipeId
-      //       console.log("hrre");
-
-      // console.log(recipe_id);
-      // console.log("hrre");
       let response;
       try {
         response = await this.axios.get(
