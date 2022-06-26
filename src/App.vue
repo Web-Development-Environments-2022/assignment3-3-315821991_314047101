@@ -14,7 +14,7 @@
           <b-navbar-brand >Hello Guest</b-navbar-brand>
         </b-navbar-nav>
         <b-navbar-nav class="ml-auto" v-else>
-          <b-nav-item :to="{ name:'AddPersonalRecipes' }">Create Recipe</b-nav-item>
+          <b-nav-item :to="{ name:'addPersonalRecipes' }">Create Recipe</b-nav-item>
           
            <b-nav-item-dropdown>
           <template #button-content>Personal

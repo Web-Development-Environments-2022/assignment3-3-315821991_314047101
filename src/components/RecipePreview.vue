@@ -1,5 +1,5 @@
 <template>
-  <router-link :to="{ name: 'recipe', params: { recipeId: recipe.id } }" class="recipe-preview">
+  <router-link :to="{ name: path_name, params: { recipeId: recipe.id } }" class="recipe-preview">
      <div style="text-align:center"  class="recipe-body">  
        <img style="width: 270px; height:173px;" :src="recipe.image"   />
            
@@ -33,6 +33,7 @@ export default {
   },
   data() {
     return {
+      path_name:'recipe',
       image_load: false,
       flag: false
     };
@@ -51,6 +52,10 @@ export default {
   },
   async created() {
     let recipe_id = this.recipe.id
+    if(recipe_id < 0)
+    {
+      this.path_name = 'personal_recipe_view';
+    }
     try {
       let favorite_response;
       try {
