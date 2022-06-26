@@ -1,25 +1,34 @@
 <template>
   <b-container>
- <h1 class="title">Family Recipes</h1>
+    <h3>
+      {{ title }}:
+      <slot></slot>
+    </h3>
     <b-row>
-        <b-col>
-        <FamilyRecipePreview  class="FamilyrRecipePreview"  />
+      <b-col v-for="r in recipes" :key="r.id">
+        <FamilyRecipePreview style="width: 270px; height:273px; text-align:center;"  class="family-recipePreview" :recipe="r" />
       </b-col>
     </b-row>
   </b-container>
 </template>
 
 <script>
-import FamilyRecipePreview from "../components/FamilyRecipePreview.vue";
+import { thistle } from "color-name";
+import FamilyRecipePreview from "./FamilyRecipePreview.vue";
 export default {
-
+  name: "FamilyRecipePreviewList",
   components: {
     FamilyRecipePreview
   },
- 
+  props: {
+    title: {
+      type: String,
+      required: true
+    }
+  },
   data() {
     return {
-      user_id:String
+      recipes: []
     };
   },
   mounted() {
@@ -30,14 +39,12 @@ export default {
       try {
         const response = await this.axios.get(
           this.$root.store.server_domain + "/users/family_recipes", { withCredentials: true }
-  
+         
         );
 
-         console.log(response);
-        const user_id = response.data.user_id;
-        this.user_id =user_id;
-      
-        // console.log(this.recipes);
+        const recipes = response.data;
+        this.recipes = [];
+        this.recipes.push(...recipes);
       } catch (error) {
         console.log(error);
       }
@@ -49,32 +56,13 @@ export default {
 <style lang="scss" scoped>
 .container {
   min-height: 400px;
-  background-color: rgb(245, 234, 212);
 }
-
-h1{
+h3
+{
     text-align:center; 
     color: rgb(182, 99, 22);
     font-family:'Gill Sans', 'Gill Sans MT';
     background-color: rgb(245, 234, 212);
     padding: 20px;
 }
-.btn {
-  border: none;
-  outline: none;
-  padding: 10px 16px;
-  background-color: #f1f1f1;
-  cursor: pointer;
-}
-
-/* Style the active class (and buttons on mouse-over) */
-.active, .btn:hover {
-  background-color: #666;
-  color: white;
-}
-#search-input {
-  margin-left: 20px; 
-  width: 500px; 
-}
 </style>
-
