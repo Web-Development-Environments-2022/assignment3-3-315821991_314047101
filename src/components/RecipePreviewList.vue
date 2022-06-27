@@ -9,6 +9,7 @@
         <RecipePreview style="width: 270px; height:273px; text-align:center;"  class="recipePreview" :recipe="r" />
       </b-col>
     </b-row>
+    <b-button class="random_btn" pill variant="info" @click="updateRecipes">More recieps</b-button>
   </b-container>
 </template>
 
@@ -39,7 +40,6 @@ export default {
       try {
         const response = await this.axios.get(
           this.$root.store.server_domain + "/recipes/random", { withCredentials: true }
-          // "https://test-for-3-2.herokuapp.com/recipes/random"
         );
 
         // console.log(response);
@@ -67,4 +67,16 @@ h3
     background-color: rgb(245, 234, 212);
     padding: 20px;
 }
+
+.random_btn:hover
+{
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+.random_btn:active
+{
+  transform: translateY(1px);
+}
+
+
 </style>
