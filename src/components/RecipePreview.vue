@@ -25,16 +25,16 @@
 
 <script>
 export default {
-  mounted() {
-    //console.log(this.recipe.id);
-    this.axios.get(this.recipe.image).then((i) => {
-          this.image_load = true;
-    });
-  },
+  // mounted() {
+  //   //console.log(this.recipe.id);
+  //   this.axios.get(this.recipe.image).then((i) => {
+  //         this.image_load = true;
+  //   });
+ // },
   data() {
     return {
       path_name:'recipe',
-      image_load: false,
+     // image_load: false,
       flag: false
     };
   },
