@@ -1,7 +1,7 @@
 <template>
   <router-link :to="{ name: path_name, params: { recipeId: recipe.id } }" class="recipe-preview">
      <div style="text-align:center"  class="recipe-body">  
-       <img style="width: 270px; height:173px;" :src="recipe.image"   />
+       <img class="recipe_preview_img" style="width: 270px; height:173px;" :src="recipe.image"   />
            
     </div>
     <div style="text-align:center" class="recipe-footer">
@@ -82,6 +82,17 @@ export default {
 
 <style scoped>
 
+.recipe_preview_img:hover
+{
+  transform: translateY(2px);
+  box-shadow: 0 30px 30px 0 rgba(0,0,0,0.24), 0 30px 50px 0 rgba(0,0,0,0.19);
+
+}
+
+.recipe_preview_img
+{
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
 
 .recipe-preview {
   display: inline-block;
