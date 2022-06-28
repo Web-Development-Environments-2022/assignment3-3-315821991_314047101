@@ -23,12 +23,6 @@ export default {
   components: {
     RecipePreview
   },
-  props: {
-    title: {
-      type: String,
-      required: true
-    }
-  },
   data() {
     return {
       recipes: []
