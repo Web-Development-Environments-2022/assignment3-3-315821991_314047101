@@ -7,9 +7,9 @@
     
    <div>
     <h2 class="subTitles">
+      <h1   class="title">Last Viewed Recipes</h1>
       <router-link v-if="!$root.store.username" to="/login" tag="button">You need to Login to view this</router-link>
-       <b-container>
-          <h1   class="title">Last Viewed Recipes</h1>
+       <b-container v-else>
                 <div v-if="recipes.length==0" class="center_div">
                     You have not yet viewed any recipes on our website...
                 </div>

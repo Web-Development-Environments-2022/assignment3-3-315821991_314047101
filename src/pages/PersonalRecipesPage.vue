@@ -8,6 +8,11 @@
         <RecipePreview  class="recipePreview" :recipe="r" />
       </b-col>
     </b-row>
+      <div v-if="recipes.length==0" class="center_div">
+          <h2>
+            You don't have any personal recipe,<br>and you are more than welcome to add one!
+          </h2>
+      </div>
   </b-container>
 </template>
 
@@ -62,6 +67,15 @@ h1{
     color: rgb(182, 99, 22);
     font-family:'Gill Sans', 'Gill Sans MT';
     background-color: rgb(245, 234, 212);
+    padding: 20px;
+}
+h2
+{
+    text-align:center; 
+    color: rgb(182, 99, 22);
+    font-family:'Gill Sans', 'Gill Sans MT';
+    background-color: rgb(245, 234, 212);
+    font-size: 30px;
     padding: 20px;
 }
 .btn {
