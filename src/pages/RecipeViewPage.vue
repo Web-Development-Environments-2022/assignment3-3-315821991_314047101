@@ -29,9 +29,9 @@
                 <img v-if="!flag" src="../assets/not_favorite_icon.png" width="25" height="25" >
                 <img v-if="flag" src="../assets/favorite_icon.png" width="25" height="25" >
                 </div>
-                  <img v-if="recipe.vegetarian" src="../assets/vegetarian_icon.png" width="25" height="25" >
-                  <img v-if="recipe.vegan" src="../assets/vegan_icon.png" width="25" height="25" >
-                  <img v-if="recipe.glutenFree" src="../assets/gluten_free_icon.png" width="25" height="25" >
+                  <img v-if="recipe.vegetarian==true || recipe.vegetarian=='true'" src="../assets/vegetarian_icon.png" width="25" height="25" >
+                  <img v-if="recipe.vegan==true || recipe.vegan=='true'" src="../assets/vegan_icon.png" width="25" height="25" >
+                  <img v-if="recipe.glutenFree==true || recipe.glutenFree=='true'" src="../assets/gluten_free_icon.png" width="25" height="25" >
               </div>
             <br>
             Instructions:

@@ -15,9 +15,9 @@
       <ul class="recipe-overview">
         <img v-if="!flag" class="favorite_button" src="../assets/not_favorite_icon.png" width="25" height="25" >
         <img v-if="flag" class="favorite_button" src="../assets/favorite_icon.png" width="25" height="25" >
-        <img v-if="recipe.vegetarian" src="../assets/vegetarian_icon.png" width="25" height="25" >
-        <img v-if="recipe.vegan" src="../assets/vegan_icon.png" width="25" height="25" >
-        <img v-if="recipe.glutenFree" src="../assets/gluten_free_icon.png" width="25" height="25" >
+        <img v-if="recipe.vegetarian==true || recipe.vegetarian=='true'" src="../assets/vegetarian_icon.png" width="25" height="25" >
+        <img v-if="recipe.vegan==true ||recipe.vegan=='true'" src="../assets/vegan_icon.png" width="25" height="25" >
+        <img v-if="recipe.glutenFreen==true ||recipe.glutenFree=='true'" src="../assets/gluten_free_icon.png" width="25" height="25" >
       </ul>
     </div>
   </router-link>
