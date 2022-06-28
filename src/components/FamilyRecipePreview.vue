@@ -1,5 +1,5 @@
 <template>
-  <router-link :to="{ name: 'recipe', params: { recipeId: recipe.recipe_id } }" class="recipe-preview">
+  <router-link :to="{ name: 'familyRecipePage', params: { recipeId: recipe.recipe_id } }" class="recipe-preview">
      <div style="text-align:center"  class="recipe-body">  
        <img class="recipe_preview_img" style="width: 270px; height:173px;" :src="recipe.image"   />
     </div>
@@ -22,16 +22,6 @@ export default {
       required: true
     },
   },
-  async created() {
-    let recipe_id = this.recipe.recipe_id
-    try {
-      console.log(recipe_id);
-
-      
-    } catch (error) {
-      console.log(error);
-    }
-  }
 };
 </script>
 
