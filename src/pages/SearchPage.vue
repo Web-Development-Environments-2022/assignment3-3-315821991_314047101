@@ -1,15 +1,27 @@
 <template>
   <div class="container">
     <h1 class="title">Search for our recipes..</h1>
-    
-    <div class="search_filters">
 
-          <b-form-select class="options" v-model="form.cuisine" :options="cuisine_options">
-          </b-form-select>
-          <b-form-select class="options" v-model="form.diet" :options="diet_options"></b-form-select>
-          <b-form-select class="options" v-model="form.intolerance" :options="intolerance_options"></b-form-select>
+      <div class="input-query">
+        <input size="50" type="text" placeholder="What would you like to search?" v-model="LastQuery">
+      </div>
+      
+      <div class="search_filters">
+        <p>How many results would you like to recieve?:</p>
+        <b-form-select class="options" v-model="form.results_number" :options="number_options"></b-form-select><br>
+        <p>Filter results by:</p>
+        <p>cuisine:</p>
+        <b-form-select class="options" v-model="form.cuisine" :options="cuisine_options"></b-form-select><br>
+        <p>diet:</p>
+        <b-form-select class="options" v-model="form.diet" :options="diet_options"></b-form-select><br>
+        <p>intolerance:</p>
+        <b-form-select class="options" v-model="form.intolerance" :options="intolerance_options"></b-form-select>
+      </div>
+      <br>
 
-    </div>
+      <div class="search_button" @click="onSearch"> <img src="../assets/search_icon.png" width="25" height="25" ></div>
+      <b-button variant="danger" @click="onReset">Reset search parameters</b-button>
+
   </div>
 </template>
 
@@ -20,24 +32,22 @@
 // } from "vuelidate/lib/validators";
 
 export default {
-  name: "Register",
+  name: "Search",
   data() {
     return {
       search_results: [],
       cuisine_options: [],
       diet_options: [],
+      number_options: [5, 10, 15],
       intolerance_options: [],
       form: {
-        result_number: 5,
+        results_number: 5,
         cuisine: "",
         diet: "",
         intolerance: "",
-        // diet: null,
-        // intolerance: null,
         submitError: undefined
       },
-      // errors: [],
-      // validated: false
+      LastQuery: sessionStorage.getItem("LastQuery"),
     };
   },
   async created() {
@@ -55,6 +65,34 @@ export default {
         return;
       }
   },
+  methods: {
+    validateState(param) {
+      const { $dirty, $error } = this.$v.form[param];
+      return $dirty ? !$error : null;
+    },
+    async onSearch() {
+      let response;
+      try {
+        response = await this.axios.get(
+          this.$root.store.server_domain + "/recipes/search?query=" + this.LastQuery + "&number=" + this.form.results_number
+          + "&cuisine='" + this.form.cuisine + "'&diet=" + this.form.diet + "&intolerance=" + this.form.intolerance, { withCredentials: true });
+        if (response.status !== 200) this.$router.replace("/NotFound");
+      } catch (error) {
+        console.log("error.response.status", error.response.status);
+        this.$router.replace("/NotFound");
+        return;
+      }
+      console.log(response)
+
+    },
+    onReset() {
+        this.form.results_number = 5;
+        this.form.cuisine = "";
+        this.form.diet = "";
+        this.form.intolerance = "";
+    }
+    }
+  
   // validations: {
   //   form: {
   //     query: {
@@ -84,6 +122,31 @@ h1{
     font-family:'Gill Sans', 'Gill Sans MT';
     background-color: rgb(245, 234, 212);
     padding: 20px;
+}
+
+.search_button
+{
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.search_button:hover
+{
+  transform: translateY(-2px);
+}
+
+.input-query
+{
+  display: flex;
+  justify-content: center;
+}
+
+.options
+{
+  justify-content: center;
+  display: flex;
+  width: 40%
 }
 
 </style>
