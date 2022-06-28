@@ -1,7 +1,15 @@
 <template>
   <div class="container">
     <h1 class="title">Search for our recipes..</h1>
+    
+    <div class="search_filters">
 
+          <b-form-select class="options" v-model="form.cuisine" :options="cuisine_options">
+          </b-form-select>
+          <b-form-select class="options" v-model="form.diet" :options="diet_options"></b-form-select>
+          <b-form-select class="options" v-model="form.intolerance" :options="intolerance_options"></b-form-select>
+
+    </div>
   </div>
 </template>
 
@@ -19,13 +27,15 @@ export default {
       cuisine_options: [],
       diet_options: [],
       intolerance_options: [],
-      // form: {
-      //   query: "",
-      //   cuisine: null,
-      //   diet: null,
-      //   intolerance: null,
-      //   submitError: undefined
-      // },
+      form: {
+        result_number: 5,
+        cuisine: "",
+        diet: "",
+        intolerance: "",
+        // diet: null,
+        // intolerance: null,
+        submitError: undefined
+      },
       // errors: [],
       // validated: false
     };
