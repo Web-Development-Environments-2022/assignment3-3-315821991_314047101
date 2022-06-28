@@ -1,6 +1,7 @@
 <template>
   <b-container>
- <h1 class="title">Favorite Recipes</h1>
+    <h1 class="title">Favorite Recipes</h1>
+    <div v-if="this.flag">
     <div v-if="recipes.length==0" class="center_div">
         <h2>
           You don't have any favorite recipe,<br>and you are more than welcome to add one!
@@ -11,6 +12,7 @@
         <RecipePreview  class="recipePreview" :recipe="r" />
       </b-col>
     </b-row>
+    </div>
   </b-container>
 </template>
 
@@ -23,7 +25,8 @@ export default {
   },
   data() {
     return {
-      recipes: []
+      recipes: [],
+      flag: false
     };
   },
   mounted() {
@@ -38,6 +41,7 @@ export default {
         const recipes = response.data;
         this.recipes = [];
         this.recipes.push(...recipes);
+        this.flag = true;
       } catch (error) {
         console.log(error);
       }
