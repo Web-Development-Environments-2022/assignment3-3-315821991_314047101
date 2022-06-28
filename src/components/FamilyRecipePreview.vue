@@ -1,5 +1,5 @@
 <template>
-  <router-link :to="{ name: 'familyRecipePage', params: { recipeId: recipe.recipe_id } }" class="recipe-preview">
+  <router-link :to="{ name: 'familyRecipePage', params: { recipe_data: recipe } }" class="recipe-preview">
      <div style="text-align:center"  class="recipe-body">  
        <img class="recipe_preview_img" style="width: 270px; height:173px;" :src="recipe.image"   />
     </div>
