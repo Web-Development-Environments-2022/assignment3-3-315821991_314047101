@@ -25,12 +25,6 @@
 
 <script>
 export default {
-  // mounted() {
-  //   //console.log(this.recipe.id);
-  //   this.axios.get(this.recipe.image).then((i) => {
-  //         this.image_load = true;
-  //   });
- // },
   data() {
     return {
       path_name:'recipe',
@@ -43,12 +37,6 @@ export default {
       type: Object,
       required: true
     },
-    //   methods: {
-    // async FavoriteChange() {
-    //   console.log(this.flag);
-    //   // todo - need to finish
-    // }
-  //}
   },
   async created() {
     let recipe_id = this.recipe.id

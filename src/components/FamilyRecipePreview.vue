@@ -1,68 +1,52 @@
 <template>
-  <router-link>
-    
-    
- 
-   
-      <div style="text-align:center" :recipe_1="recipe_1.recipe_owner " class="recipe-title">
-      <li>{{ recipe_1.recipe_owner }} recipe 1</li>
+  <router-link :to="{ name: 'recipe', params: { recipeId: recipe.recipe_id } }" class="recipe-preview">
+     <div style="text-align:center"  class="recipe-body">  
+       <img class="recipe_preview_img" style="width: 270px; height:173px;" :src="recipe.image"   />
+    </div>
+    <div style="text-align:center" class="recipe-footer">
+      <div style="text-align:center" :title="recipe.recipe_name" class="recipe-title">
+      {{ recipe.recipe_name }}
       </div>
-
-    
-
+      <ul class="recipe-overview">
+        <li>{{ recipe.recipe_owner }}</li>
+      </ul>
+    </div>
   </router-link>
 </template>
 
 <script>
 export default {
-    props: {
-    user_id: {
-      type: String,
-      required: true
-    },
-    recipe_1: {
+  props: {
+    recipe: {
       type: Object,
       required: true
     },
-    recipe_2: {
-      type: Object,
-      required: true
-    },
-    recipe_3: {
-      type: Object,
-      required: true
-    }
-
-
   },
-  mounted() {
-    this.updateRecipes();
-  },
-  methods: {
-    async updateRecipes() {
-      try {
-        const response = await this.axios.get(
-          this.$root.store.server_domain + "/users/family_recipes", { withCredentials: true }
-        );
+  async created() {
+    let recipe_id = this.recipe.recipe_id
+    try {
+      console.log(recipe_id);
 
-        console.log(response);
-        const family_recipes = response.data;
-        this.user_id=family_recipes.user_id;
-        this.recipe_1 =family_recipes.recipe_1;
-        this.recipe_2 =family_recipes.recipe_1;
-        this.recipe_3 =family_recipes.recipe_3;
-
-        // console.log(this.recipes);
-      } catch (error) {
-        console.log(error);
-      }
+      
+    } catch (error) {
+      console.log(error);
     }
   }
-
 };
 </script>
-<style scoped>
 
+<style scoped>
+.recipe_preview_img:hover
+{
+  transform: translateY(2px);
+  box-shadow: 0 30px 30px 0 rgba(0,0,0,0.24), 0 30px 50px 0 rgba(0,0,0,0.19);
+
+}
+
+.recipe_preview_img
+{
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
 
 .recipe-preview {
   display: inline-block;
@@ -141,6 +125,11 @@ li{
   flex: 1 auto;
   table-layout: fixed;
   margin-bottom: 0px;
+}
+
+.favorite_button
+{
+  cursor: pointer;
 }
 
 .recipe-preview .recipe-footer ul.recipe-overview li {
