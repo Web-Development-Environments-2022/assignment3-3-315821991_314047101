@@ -1,7 +1,12 @@
 <template>
   <b-container>
  <h1 class="title">Favorite Recipes</h1>
-    <b-row>
+    <div v-if="recipes.length==0" class="center_div">
+        <h2>
+          You don't have any favorite recipe,<br>and you are more than welcome to add one!
+        </h2>
+    </div>
+    <b-row v-else>
       <b-col v-for="r in recipes" :key="r.id" >
         <RecipePreview  class="recipePreview" :recipe="r" />
       </b-col>
@@ -16,12 +21,6 @@ export default {
   components: {
     RecipePreview
   },
-  props: {
-    title: {
-      type: String,
-      required: true
-    }
-  },
   data() {
     return {
       recipes: []
@@ -35,14 +34,10 @@ export default {
       try {
         const response = await this.axios.get(
           this.$root.store.server_domain + "/users/favorites", { withCredentials: true }
-          // "https://test-for-3-2.herokuapp.com/recipes/random"
         );
-
-        // console.log(response);
         const recipes = response.data;
         this.recipes = [];
         this.recipes.push(...recipes);
-        // console.log(this.recipes);
       } catch (error) {
         console.log(error);
       }
@@ -64,6 +59,15 @@ h1{
     background-color: rgb(245, 234, 212);
     padding: 20px;
 }
+h2
+{
+    text-align:center; 
+    color: rgb(182, 99, 22);
+    font-family:'Gill Sans', 'Gill Sans MT';
+    background-color: rgb(245, 234, 212);
+    font-size: 30px;
+    padding: 20px;
+}
 .btn {
   border: none;
   outline: none;
@@ -81,62 +85,5 @@ h1{
   margin-left: 20px; 
   width: 500px; 
 }
+
 </style>
-
-
-<!-- 
-<script>
-import FavoriteRecipes from "../components/FavoriteRecipes";
-export default {
-  components: { 
-    FavoriteRecipes
-  }, 
-  data() {
-    return {
-      recipe: []
-    };
-  },
-  methods: {
-    getFavoriteRecipes: async function() {
-      try {
-        const favoriteRecipes = await this.axios.get(
-        'http://localhost:3000/users/favorites'
-        );
-        for (const i in favoriteRecipes.data) {
-          if (favoriteRecipes.data[i] != undefined) {
-            this.recipe.push(favoriteRecipes.data[i]);
-          }
-        }
-      } catch (err) {
-        console.log(err.response);
-      }
-    }
-  },
-  mounted(){
-    this.getFavoriteRecipes();
-  } 
-};
-</script> -->
-
-
-<!-- 
-<style scoped>
-/* Style the buttons */
-.btn {
-  border: none;
-  outline: none;
-  padding: 10px 16px;
-  background-color: #f1f1f1;
-  cursor: pointer;
-}
-
-/* Style the active class (and buttons on mouse-over) */
-.active, .btn:hover {
-  background-color: #666;
-  color: white;
-}
-#search-input {
-  margin-left: 20px; 
-  width: 500px; 
-}
-</style> -->

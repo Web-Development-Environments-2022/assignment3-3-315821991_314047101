@@ -32,12 +32,6 @@ export default {
     RecipePreviewList,
     RecipePreview
    },
-  props: {
-    title: {
-      type: String,
-      required: true
-    }
-  },
   data() {
     return {
       recipes: []
