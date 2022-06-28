@@ -85,6 +85,8 @@ h2
     font-family:'Gill Sans', 'Gill Sans MT';
     background-color: rgb(245, 234, 212);
     padding: 20px;
+    margin: 20px 0 10px;
+    height: 500px;
 }
 
 .center_div {

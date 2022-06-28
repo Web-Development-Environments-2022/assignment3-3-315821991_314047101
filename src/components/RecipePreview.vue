@@ -8,16 +8,16 @@
       <div style="text-align:center" :title="recipe.title" class="recipe-title">
       {{ recipe.title }}
       </div>
-      <ul class="recipe-overview">
+      <img v-if="!flag" class="button" src="../assets/not_favorite_icon.png" width="25" height="25" >
+        <img v-if="flag" class="button" src="../assets/favorite_icon.png" width="25" height="25" >
+        <img v-if="recipe.vegetarian==true || recipe.vegetarian==='true'" src="../assets/vegetarian_icon.png" width="25" height="25" >
+        <img v-if="recipe.vegan==true ||recipe.vegan==='true'" src="../assets/vegan_icon.png" width="25" height="25" >
+        <img v-if="recipe.glutenFreen==true ||recipe.glutenFreen=='true'" src="../assets/gluten_free_icon.png" width="25" height="25" >
+        <img v-if="isSeen" class="button" src="../assets/seen.png" width="60" height="20" >
+      <ul class="recipe-overview" >
         <li>{{ recipe.readyInMinutes }} minutes</li>
         <li>{{ recipe.aggregateLikes }} likes</li>
-      </ul>
-      <ul class="recipe-overview">
-        <img v-if="!flag" class="favorite_button" src="../assets/not_favorite_icon.png" width="25" height="25" >
-        <img v-if="flag" class="favorite_button" src="../assets/favorite_icon.png" width="25" height="25" >
-        <img v-if="recipe.vegetarian==true || recipe.vegetarian=='true'" src="../assets/vegetarian_icon.png" width="25" height="25" >
-        <img v-if="recipe.vegan==true ||recipe.vegan=='true'" src="../assets/vegan_icon.png" width="25" height="25" >
-        <img v-if="recipe.glutenFreen==true ||recipe.glutenFree=='true'" src="../assets/gluten_free_icon.png" width="25" height="25" >
+      
       </ul>
     </div>
   </router-link>
@@ -29,7 +29,8 @@ export default {
     return {
       path_name:'recipe',
      // image_load: false,
-      flag: false
+      flag: false,
+      isSeen:false
     };
   },
   props: {
@@ -64,6 +65,26 @@ export default {
     } catch (error) {
       console.log(error);
     }
+    try {
+      let is_seen_recipe;
+      try {
+        is_seen_recipe = await this.axios.get(
+          this.$root.store.server_domain + "/recipes/getAllHistory", { withCredentials: true });
+        if (is_seen_recipe.status !== 200) this.$router.replace("/NotFound");
+      } catch (error) {
+        console.log("error.is_seen_recipe.status", error.favorite_response.status);
+        this.$router.replace("/NotFound");
+        return;
+      }
+      for (let i = 0; i < is_seen_recipe.data.length; i++) {
+        if(is_seen_recipe.data[i] == recipe_id)
+        {
+          this.isSeen = true;
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
   }
 };
 </script>
@@ -75,6 +96,9 @@ export default {
   transform: translateY(2px);
   box-shadow: 0 30px 30px 0 rgba(0,0,0,0.24), 0 30px 50px 0 rgba(0,0,0,0.19);
 
+}
+.recipe-body{
+  color: aquamarine;
 }
 
 .recipe_preview_img
@@ -89,27 +113,21 @@ export default {
   position: relative;
   margin: 10px 10px;
 }
-.recipe-preview > .recipe-body {
-  width: 100%;
-  height: 200px;
-  position: relative;
-}
+
+
+/* 
 .recipe-image{
   width: 50%;
   height: 60px;
-}
+} */
 
-.recipe-preview .recipe-body .recipe-image {
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: auto;
-  margin-bottom: auto;
-  display: block;
-  width: 98%;
-  height: auto;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  background-size: cover;
+.recipe-preview{
+ position: absolute;
+  left: 40px;
+  width: 300px;
+  height: 290px;
+ 
+
 }
 
 .recipe-preview .recipe-footer {
@@ -142,7 +160,7 @@ li{
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
-.recipe-preview .recipe-footer ul.recipe-overview {
+/* .recipe-preview .recipe-footer ul.recipe-overview {
   padding: 5px 10px;
   width: 100%;
   display: -webkit-box;
@@ -159,9 +177,9 @@ li{
   flex: 1 auto;
   table-layout: fixed;
   margin-bottom: 0px;
-}
+} */
 
-.favorite_button
+.button
 {
   cursor: pointer;
 }
@@ -178,4 +196,6 @@ li{
   display: table-cell;
   text-align: center;
 }
+
+
 </style>

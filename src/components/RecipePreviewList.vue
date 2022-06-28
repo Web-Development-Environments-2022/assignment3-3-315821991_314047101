@@ -9,7 +9,10 @@
         <RecipePreview style="width: 270px; height:273px; text-align:center;"  class="recipePreview" :recipe="r" />
       </b-col>
     </b-row>
-    <b-button class="random_btn" pill variant="info" @click="updateRecipes">More recieps</b-button>
+    <h4>
+      <b-button class="random_btn" pill variant="info" @click="updateRecipes">More recieps</b-button>
+    </h4>
+    
   </b-container>
 </template>
 
@@ -65,12 +68,22 @@ h3
     color: rgb(182, 99, 22);
     font-family:'Gill Sans', 'Gill Sans MT';
     background-color: rgb(245, 234, 212);
-    padding: 20px;
+    padding: 10px;
+}
+h4{
+  //position: absolute;
+ // left: 40px;
+ // width: 300px;
+  height: 200px;
+  padding: 350px;
+
+ 
 }
 
 .random_btn:hover
 {
   box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+
 }
 
 .random_btn:active
