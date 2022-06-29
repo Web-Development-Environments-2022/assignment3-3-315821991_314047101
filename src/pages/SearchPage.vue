@@ -6,7 +6,7 @@
         <input size="50" type="text" placeholder="What recipes would you like to explore?" v-model="LastQuery" required @keyup="SearchAction">
       </div>
       <div v-if="!this.is_query" class="error_search">
-        <p>You must eneter a query..</p>
+        <p>You must enter a query..</p>
       </div>
       
       <div class="search_filters">
