@@ -2,24 +2,27 @@
   <div class="container">
     <h1 class="title">Main Page</h1>
     <h2 class="subTitles">
-      <RecipePreviewList title="Explore this recipes" class="RandomRecipes center" />
+      <h1   class="title">Explore this recipes</h1>
+      <RecipePreviewList class="RandomRecipes center" />
     </h2>
     
    <div>
-    <h2 class="subTitles">
-      <h1   class="title">Last Viewed Recipes</h1>
+    <h5 class="subTitles">
+      <h1   class="title"><br>Last Viewed Recipes</h1>
       <router-link class="need_login" v-if="!$root.store.username" to="/login" tag="button">Login to view this page</router-link>
        <b-container v-else>
                 <div v-if="recipes.length==0" class="center_div">
                     You have not yet viewed any recipes on our website...
                 </div>
-              <b-row >
-                <b-col v-for="r in recipes" :key="r.id" >
-                  <RecipePreview  style="width: 270px; height:273px" class="recipePreview" :recipe="r" />
+                 <b-col >
+              <b-row v-for="r in recipes" :key="r.id" >
+               
+                  <RecipePreview  style="width: 400px; height:315px" class="recipePreview" :recipe="r" />
+                </b-row>
                 </b-col>
-              </b-row>
+              
       </b-container>
-    </h2>
+    </h5>
    </div>
   </div>
 </template>
@@ -58,8 +61,18 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+h5
+{
+position:absolute;
+  left: 760px;
+  right: 180px;
+  top:220px;
+  height: 1307px;
+
+  background-color: rgb(245, 234, 212);
+}
 .RandomRecipes {
-  margin: 10px 0 10px;
+  margin: 10px 0 50px;
 }
 .blur {
   -webkit-filter: blur(5px); /* Safari 6.0 - 9.0 */
@@ -77,16 +90,21 @@ h1
     font-family:'Gill Sans', 'Gill Sans MT';
     background-color: rgb(245, 234, 212);
     padding: 20px;
+    
+ 
 }
 h2
 {
-    text-align:center; 
+    text-align:center;
     color: rgb(182, 99, 22);
     font-family:'Gill Sans', 'Gill Sans MT';
     background-color: rgb(245, 234, 212);
-    padding: 20px;
+    padding: 50px;
     margin: 20px 0 10px;
-    height: 500px;
+    height: 1300px;
+    width: 550px;
+    top:900px;
+
 }
 
 .need_login{

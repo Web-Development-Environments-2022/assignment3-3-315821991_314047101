@@ -134,20 +134,21 @@ export default {
   background-size: cover;
 }
 .recipe-preview{
-   width: 300px;
+   width: 400px;
   height: 290px;
+  padding: 60px;
  
 
 }
 
 .recipe-preview .recipe-footer {
   width: 100%;
-  height: 50%;
+  height: 100%;
   overflow: hidden;
 }
 
 li{
-  padding: 10px 10px;
+  padding: 5px 5px;
   width: 100%;
   font-size: 12pt;
   text-align: left;
@@ -171,7 +172,7 @@ li{
 }
 
 .recipe-preview .recipe-footer ul.recipe-overview {
-  padding: 5px 10px;
+  padding: 2px 0px;
   width: 100%;
   display: -webkit-box;
   display: -moz-box;
@@ -191,6 +192,7 @@ li{
 
 .favorite_button
 {
+
   cursor: pointer;
 }
 
