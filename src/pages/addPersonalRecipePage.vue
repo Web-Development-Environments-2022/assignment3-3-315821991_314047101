@@ -6,12 +6,13 @@
         <b-modal id="modal-prevent-closing" ref="modal" title="Submit Your Recipe Details" 
             @show="resetModal" @hidden="resetModal" @ok="handleOk">
             <form ref="form" @submit.stop.prevent="handleSubmit">
-                <b-form-group label="Recipe title" label-for="title" :state="titleState">
+            
+                <b-form-group label="Recipe title" label-for="title" invalid-feedback="Title is required" :state="titleState">
                     <b-form-input id="title" placeholder="Enter title" v-model="title" :state="titleState"
                         required></b-form-input>
                 </b-form-group>
 
-                <b-form-group label="Preparation time" label-for="time" :state="timeState">
+                <b-form-group label="Preparation time" label-for="time" invalid-feedback="Preparation time is required" :state="timeState">
                     <b-form-input id="time" type="number" v-model="time" :state="timeState"
                         required></b-form-input>
                 </b-form-group>
@@ -20,7 +21,7 @@
                 <label for="myCheck">  Vegetarian  </label> <input type="checkbox" id="vegetarian"><br>
                 <label for="myCheck">  Gluten Free  </label> <input type="checkbox" id="glutenFree"><br><br>
 
-                <b-form-group label="Number of servings:" label-for="servings" :state="servingsState">
+                <b-form-group label="Number of servings:" label-for="servings" invalid-feedback="Number of serving is required" :state="servingsState">
                     <b-form-input id="servings" type="number" min=1 placeholder="Enter number of servings" v-model="servings"
                         :state="servingsState" required>
                     </b-form-input>
@@ -32,13 +33,13 @@
                     </b-form-input>
                 </b-form-group>
 
-                <b-form-group label="Enter ingredients" label-for="extendedIngredients" :state="extendedIngredientsState">
+                <b-form-group label="Enter ingredients" label-for="extendedIngredients"  invalid-feedback="Ingredients is required" :state="extendedIngredientsState">
                     <b-form-input id="extendedIngredients" placeholder="For exemple: 3 eggs, 1 cup of sugar.." v-model="extendedIngredients"
                         :state="extendedIngredientsState" required>
                     </b-form-input>
                 </b-form-group>
 
-                <b-form-group label="Enter instructions" label-for="analyzedInstructions" :state="analyzedInstructionsState">
+                <b-form-group label="Enter instructions" label-for="analyzedInstructions" invalid-feedback="Instructions is required" :state="analyzedInstructionsState">
                     <b-form-input id="analyzedInstructions" placeholder="For exemple: Mix it all up, Enjoy.." v-model="analyzedInstructions" :state="analyzedInstructionsState" required>
                     </b-form-input>
                 </b-form-group>
@@ -86,13 +87,33 @@ export default {
 
     methods: {
         checkFormValidity() {
-            //const valid = this.$refs.form.checkValidity()
-            this.titleState = valid
-            this.timeState = valid
-            this.servingsState = valid
-            this.imageState = valid
-            this.analyzedInstructionsState = valid
-            this.extendedIngredientsState = valid
+            const valid = this.$refs.form.checkValidity();
+            const StateObj = document.getElementById("title");
+            if (!StateObj.checkValidity()) {
+                this.titleState = false;
+            }
+
+            const timeStateObj = document.getElementById("time");
+            if (!timeStateObj.checkValidity()) {
+                this.timeState = valid;
+            }
+
+            const servingsStateObj = document.getElementById("servings");
+            if (!servingsStateObj.checkValidity()) {
+                this.servingsState = false;
+            }
+
+            const IngredientsObj = document.getElementById("extendedIngredients");
+            if (!IngredientsObj.checkValidity()) {
+                this.extendedIngredientsState = false;
+            }
+
+
+            const InstructionsObj = document.getElementById("analyzedInstructions");
+            if (!InstructionsObj.checkValidity()) {
+                this.analyzedInstructionsState = false;
+            }
+
             return valid
         },
         resetModal() {
@@ -113,14 +134,22 @@ export default {
             this.extendedIngredientsState = null
         },
         handleOk(bvModalEvent) {
+            
             bvModalEvent.preventDefault()
-
             console.log('-------submit-------');
             this.handleSubmit()
         },
         handleSubmit() {
-            // Exit when the form isn't valid
+            if (!this.checkFormValidity()) {
+                        console.log("not")
+            return
+            }
             this.createMyRecipe();
+
+            this.$nextTick(() => {
+                this.$bvModal.hide('modal-prevent-closing')
+            })
+
         }, async createMyRecipe() {
             try {
                 console.log('time: ',this.time );
@@ -129,8 +158,10 @@ export default {
                 var vegetarian=document.getElementById("vegetarian");
                 var glutenFree=document.getElementById("glutenFree");
 
+               
+
                 const response = await this.axios.post(
-                    "http://localhost:3000/users/add_personal_recipe",
+                    "https://allrecipes.cs.bgu.ac.il/users/add_personal_recipe",
     
                     {
                         title: this.title,
