@@ -72,7 +72,7 @@ Vue.config.productionTip = false;
 
 const shared_data = {
   username: localStorage.username,
-  server_domain: "http://localhost:3000",
+  server_domain: "https://allrecipes.cs.bgu.ac.il",//"http://localhost:3000",
   login(username) {
     localStorage.setItem("username", username);
     this.username = username;

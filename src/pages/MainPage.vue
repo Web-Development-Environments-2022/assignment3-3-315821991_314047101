@@ -106,7 +106,7 @@ export default {
     async LastThreeViewes() {
       try {
         const response = await this.axios.get(
-          this.$root.store.server_domain + "/recipes/getThreeLastViewedRecipes", { withCredentials: true }
+          "https://allrecipes.cs.bgu.ac.il/recipes/getThreeLastViewedRecipes", { withCredentials: true }
         );
         const recipes = response.data;
         this.recipes = [];

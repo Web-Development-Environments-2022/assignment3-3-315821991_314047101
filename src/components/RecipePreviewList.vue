@@ -45,7 +45,7 @@ export default {
     async updateRecipes() {
       try {
         const response = await this.axios.get(
-          this.$root.store.server_domain + "/recipes/random", { withCredentials: true }
+         "https://allrecipes.cs.bgu.ac.il/recipes/random", { withCredentials: true }
         );
 
         // console.log(response);
