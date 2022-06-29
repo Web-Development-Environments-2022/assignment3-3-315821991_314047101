@@ -7,11 +7,14 @@
           You don't have any favorite recipe,<br>and you are more than welcome to add one!
         </h2>
     </div>
-    <b-row v-else>
-      <b-col v-for="r in recipes" :key="r.id" >
-        <RecipePreview  class="recipePreview" :recipe="r" />
-      </b-col>
-    </b-row>
+    <div v-else class="div_center">
+      <b-row>
+        <b-col v-for="r in recipes" :key="r.id" >
+          <RecipePreview  class="recipePreview" :recipe="r" />
+        </b-col>
+      </b-row>
+
+    </div>
     </div>
   </b-container>
 </template>
@@ -90,4 +93,9 @@ h2
   width: 500px; 
 }
 
+.div_center
+{
+  margin: 0 auto;
+  margin-left: 5%; 
+}
 </style>

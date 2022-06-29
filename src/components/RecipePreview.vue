@@ -8,16 +8,16 @@
       <div style="text-align:center" :title="recipe.title" class="recipe-title">
       {{ recipe.title }}
       </div>
+      <ul class="recipe-overview" >
+        <li>{{ recipe.readyInMinutes }} minutes</li>
+        <li>{{ recipe.aggregateLikes }} likes</li>
+      </ul>
         <img v-if="!flag" class="button" src="../assets/not_favorite_icon.png" width="25" height="25" >
         <img v-if="flag" class="button" src="../assets/favorite_icon.png" width="25" height="25" >
         <img v-if="recipe.vegetarian==true || recipe.vegetarian==='true'" src="../assets/vegetarian_icon.png" width="25" height="25" >
         <img v-if="recipe.vegan==true ||recipe.vegan==='true'" src="../assets/vegan_icon.png" width="25" height="25" >
         <img v-if="recipe.glutenFree==true || recipe.glutenFree=='true'" src="../assets/gluten_free_icon.png" width="25" height="25" >
         <img v-if="isSeen" class="button" src="../assets/seen.png" width="60" height="20" >
-      <ul class="recipe-overview" >
-        <li>{{ recipe.readyInMinutes }} minutes</li>
-        <li>{{ recipe.aggregateLikes }} likes</li>
-      </ul>
     </div>
   </router-link>
 </template>
@@ -109,10 +109,9 @@ export default {
 
 .recipe-preview {
   display: inline-block;
-  width: 90%;
   height: 100%;
   position: relative;
-  margin: 10px 10px;
+  margin: 15px 10px;
 }
 .recipe-preview > .recipe-body {
   width: 100%;

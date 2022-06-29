@@ -2,20 +2,17 @@
   <b-container>
     <h3>
       <h1>{{ title }}</h1>
-      
-
-    
       <b-col>
+      <div class="div_center">
       <b-row  v-for="r in recipes" :key="r.id">
-        <RecipePreview style="width: 400px; height:300px; text-align:center;"  class="recipePreview" :recipe="r" />
-        </b-row>
-     
+        <RecipePreview style="text-align:center;"  class="recipePreview" :recipe="r" />
+      </b-row>  </div>
+      
+      <div>
+        <b-button class="random_btn" pill variant="info" @click="updateRecipes">More recieps</b-button>
+      </div>      
      </b-col>
-      </h3>
-    <h4>
-      <b-button class="random_btn" pill variant="info" @click="updateRecipes">More recieps</b-button>
-    </h4>
-    
+      </h3>    
   </b-container>
 </template>
 
@@ -45,7 +42,7 @@ export default {
     async updateRecipes() {
       try {
         const response = await this.axios.get(
-         "https://allrecipes.cs.bgu.ac.il/recipes/random", { withCredentials: true }
+          this.$root.store.server_domain + "/recipes/random", { withCredentials: true }
         );
 
         // console.log(response);
@@ -77,11 +74,12 @@ h3
     
 
 }
-h4{
-  padding: 60px;
-
+.random_btn
+{
+  margin-top: 40%;
+  width: 90%;
+  margin-left: 10%;
 }
-
 .random_btn:hover
 {
 
@@ -97,9 +95,10 @@ h4{
 h1
 {
     text-align:center; 
+    width: 400px;
     color: rgb(182, 99, 22);
     font-family:'Gill Sans', 'Gill Sans MT';
     background-color: rgb(245, 234, 212);
-    padding: 20px; 
 }
+
 </style>

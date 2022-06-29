@@ -20,22 +20,6 @@
                 <label for="myCheck">  Vegetarian  </label> <input type="checkbox" id="vegetarian"><br>
                 <label for="myCheck">  Gluten Free  </label> <input type="checkbox" id="glutenFree"><br><br>
 
-
-                <!-- <b-form-group label="Is the recipe vegan?" label-for="vegan" :state="veganState">
-                    <b-form-input id="vegan" v-model="vegan" placeholder="Enter True or False" :state="veganState" required>
-                    </b-form-input>
-                </b-form-group>
-
-                <b-form-group label="Is the recipe vegetarian?" label-for="vegetarian" :state="vegetarianState">
-                    <b-form-input id="vegetarian" v-model="vegetarian" placeholder="Enter True or False" :state="vegetarianState" required>
-                    </b-form-input>
-                </b-form-group>
-
-                <b-form-group label="Is the recipe gluten free?" label-for="glutenFree" :state="glutenFreeState">
-                    <b-form-input id="glutenFree" v-model="glutenFree" placeholder="Enter True or False" :state="glutenFreeState" required>
-                    </b-form-input>
-                </b-form-group> -->
-
                 <b-form-group label="Number of servings:" label-for="servings" :state="servingsState">
                     <b-form-input id="servings" type="number" min=1 placeholder="Enter number of servings" v-model="servings"
                         :state="servingsState" required>
@@ -137,10 +121,6 @@ export default {
         handleSubmit() {
             // Exit when the form isn't valid
             this.createMyRecipe();
-
-            this.$nextTick(() => {
-                this.$bvModal.hide('modal-prevent-closing')
-            })
         }, async createMyRecipe() {
             try {
                 console.log('time: ',this.time );

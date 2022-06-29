@@ -31,14 +31,13 @@
         </b-container>
 
        <b-container v-if="$root.store.username">
-        <h1 class="title"><br>Last Viewed Recipes</h1>
+        <h3 class="title"><br>Last Viewed Recipes</h3>
                 <div v-if="recipes.length==0" class="center_div">
                     You have not yet viewed any recipes on our website...
                 </div>
                  <b-col >
                   <b-row v-for="r in recipes" :key="r.id" >
-               
-                  <RecipePreview  style="width: 400px; height:315px" class="recipePreview" :recipe="r" />
+                  <RecipePreview  style="width: 500px; height:300px;" class="recipePreview" :recipe="r" />
                 </b-row>
                 </b-col>
               
@@ -106,7 +105,7 @@ export default {
     async LastThreeViewes() {
       try {
         const response = await this.axios.get(
-          "https://allrecipes.cs.bgu.ac.il/recipes/getThreeLastViewedRecipes", { withCredentials: true }
+          this.$root.store.server_domain + "/recipes/getThreeLastViewedRecipes", { withCredentials: true }
         );
         const recipes = response.data;
         this.recipes = [];
@@ -160,6 +159,17 @@ h1
     font-family:'Gill Sans', 'Gill Sans MT';
     background-color: rgb(245, 234, 212);
     padding: 20px; 
+}
+h3
+{
+  font-size: 40px;
+  text-align:center; 
+  color: rgb(182, 99, 22);
+  font-family:'Gill Sans', 'Gill Sans MT';
+  background-color: rgb(245, 234, 212);
+  margin-top: 45px;
+  margin-bottom: 25px;
+ 
 }
 h2
 {

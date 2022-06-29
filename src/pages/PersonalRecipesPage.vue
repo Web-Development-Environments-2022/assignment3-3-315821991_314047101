@@ -1,14 +1,15 @@
-
-
 <template>
   <b-container>
  <h1 class="title">My Recipes</h1>
  
-    <b-row>
-      <b-col v-for="r in recipes" :key="r.id" >
-        <RecipePreview  style="width: 270px; height:273px" class="recipePreview" :recipe="r" />
-      </b-col>
-    </b-row>
+      <div class="div_center">
+        <b-row>
+          <b-col v-for="r in recipes" :key="r.id" >
+            <RecipePreview class="recipePreview" :recipe="r" />
+          </b-col>
+        </b-row>
+      </div>
+
       <div v-if="recipes.length==0" class="center_div">
           <h2>
             You don't have any personal recipe,<br>and you are more than welcome to add one!
@@ -81,8 +82,6 @@ h2
   background-color: #f1f1f1;
   cursor: pointer;
 }
-
-/* Style the active class (and buttons on mouse-over) */
 .active, .btn:hover {
   background-color: #666;
   color: white;
@@ -91,7 +90,10 @@ h2
   margin-left: 20px; 
   width: 500px; 
 }
+
+.div_center
+{
+  margin: 0 auto;
+  margin-left: 7%; 
+}
 </style>
-
-
-
