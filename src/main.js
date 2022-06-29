@@ -79,7 +79,6 @@ const shared_data = {
     console.log("login", this.username);
   },
   logout() {
-    console.log("ttttttt")
     console.log("logout");
     localStorage.removeItem("username");
     this.username = undefined;
