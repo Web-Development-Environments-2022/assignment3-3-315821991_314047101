@@ -111,6 +111,7 @@ export default {
       const recipes = response.data;
       this.search_results = [];
       this.search_results.push(...recipes);
+      sessionStorage.setItem("LastQuery", this.LastQuery);
     },
     onReset() {
         this.form.results_number = 5;

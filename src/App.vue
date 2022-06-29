@@ -46,6 +46,7 @@ export default {
           this.$root.store.server_domain + "/Logout", { withCredentials: true },
         );
         this.$root.store.logout();
+        sessionStorage.setItem("LastQuery", "");
         this.$root.toast("Logout", "User logged out successfully", "success");
         this.$router.push("/").catch(() => {
         this.$forceUpdate();
