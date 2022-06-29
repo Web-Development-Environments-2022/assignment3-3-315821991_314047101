@@ -23,7 +23,9 @@
       <br>
 
       <b-button class="reset_button" variant="outline-info" @click="onReset">Reset Filters</b-button>
-      <div class="search_button" @click="onSearch"> <img src="../assets/search_icon.png" width="25" height="25" ></div>
+      <div class="search_button">
+      <div @click="onSearch"> <img src="../assets/search_icon.png" width="25" height="25" ></div>
+      </div>
   </div>
 </template>
 
@@ -136,10 +138,13 @@ h1{
 
 .search_button
 {
+  width: 5%;
   display: flex;
   justify-content: center;
   margin: 0 0 10px;
   cursor: pointer;
+  flex-direction: row;
+  margin: 5px auto;
 }
 
 .search_button:hover
