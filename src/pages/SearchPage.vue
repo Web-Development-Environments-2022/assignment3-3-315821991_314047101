@@ -10,20 +10,20 @@
       </div>
       
       <div class="search_filters">
-        <p>How many results would you like to recieve?:</p>
+        <!-- <p>How many results would you like to recieve?:</p> -->
         <b-form-select class="options" v-model="form.results_number" :options="number_options"></b-form-select><br>
-        <p>Filter results by:</p>
-        <p>cuisine:</p>
+        <!-- <p>Filter results by:</p>
+        <p>cuisine:</p> -->
         <b-form-select class="options" v-model="form.cuisine" :options="cuisine_options"></b-form-select><br>
-        <p>diet:</p>
+        <!-- <p>diet:</p> -->
         <b-form-select class="options" v-model="form.diet" :options="diet_options"></b-form-select><br>
-        <p>intolerance:</p>
+        <!-- <p>intolerance:</p> -->
         <b-form-select class="options" v-model="form.intolerance" :options="intolerance_options"></b-form-select>
       </div>
       <br>
 
+      <b-button class="reset_button" variant="outline-info" @click="onReset">Reset Filters</b-button>
       <div class="search_button" @click="onSearch"> <img src="../assets/search_icon.png" width="25" height="25" ></div>
-      <b-button variant="danger" @click="onReset">Reset search parameters</b-button>
 
   </div>
 </template>
@@ -115,7 +115,17 @@ export default {
 </script>
 <style lang="scss" scoped>
 .container {
-  max-width: 500px;
+  margin: 0 auto;
+  width: 60%;
+  text-align: center;
+
+}
+
+.input-query
+{
+  margin: 30px auto;
+  display: flex;
+  justify-content: center;
 }
 h1{
     text-align:center; 
@@ -129,18 +139,13 @@ h1{
 {
   display: flex;
   justify-content: center;
+  margin: 0 0 20px;
   cursor: pointer;
 }
 
 .search_button:hover
 {
   transform: translateY(-2px);
-}
-
-.input-query
-{
-  display: flex;
-  justify-content: center;
 }
 
 .error_search
@@ -152,6 +157,28 @@ h1{
   justify-content: center;
   display: flex;
   width: 40%
+}
+
+.search_filters
+{
+  justify-content: center;
+  display: flex;
+  flex-direction: row;
+}
+
+.title
+{
+  margin: 0 0 20px;
+}
+
+.reset_button
+{
+    margin: 0 0 20px;
+}
+
+.reset_button:hover
+{
+  transform: translateY(-2px);
 }
 
 </style>
