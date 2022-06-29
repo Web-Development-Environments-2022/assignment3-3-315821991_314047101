@@ -1,8 +1,8 @@
 <template>
   <router-link :to="{ name: path_name, params: { recipeId: recipe.id } }" class="recipe-preview">
      <div style="text-align:center"  class="recipe-body">  
-       <img class="recipe_preview_img" style="width: 270px; height:173px;" :src="recipe.image"   />
-           
+       <img v-if="recipe.image" class="recipe_preview_img" style="width: 270px; height:173px;" :src="recipe.image"   />
+        <img v-else class="recipe_preview_img" style="width: 270px; height:173px;" :src="default_img"   />
     </div>
     <div style="text-align:center" class="recipe-footer">
       <div style="text-align:center" :title="recipe.title" class="recipe-title">
@@ -30,7 +30,8 @@ export default {
       path_name:'recipe',
      // image_load: false,
       flag: false,
-      isSeen:false
+      isSeen:false,
+      default_img: "https://spoonacular.com/recipeImages/2225-556x370.jpg"
     };
   },
   props: {

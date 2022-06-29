@@ -137,7 +137,6 @@ export default {
         glutenFree,
         servings
       } = response.data;
-      console.log(response)
       let _instructions = analyzedInstructions
         .map((fstep) => {
           fstep.steps[0].step = fstep.name + fstep.steps[0].step;
@@ -159,6 +158,10 @@ export default {
         servings
       };
 
+      if(_recipe.image == undefined)
+      {
+        _recipe.image = "https://spoonacular.com/recipeImages/2225-556x370.jpg";
+      }
       this.recipe = _recipe;
     } catch (error) {
       console.log(error);
