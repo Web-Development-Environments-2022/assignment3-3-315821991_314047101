@@ -22,6 +22,15 @@
       <div @click="onSearch"> <img src="../assets/search_icon.png" width="25" height="25" ></div>
       </div>
 
+      <div v-if="this.is_search_return">
+          <div class="sort_button" v-if="!search_results.length==0"> 
+            <b-dropdown size="sm" id="dropdown-1" text="Sort recipes by" class="m-md-2">
+              <b-dropdown-item @click="TimeSort">Cooking Time</b-dropdown-item>
+              <b-dropdown-item @click="PopularitySort">Popularity</b-dropdown-item>
+            </b-dropdown>
+          </div>
+      </div>
+      
       <b-row v-if="this.is_search_return">
         <b-col v-for="r in search_results" :key="r.id">
           <RecipePreview style="width: 270px; height:273px; text-align:center;"  class="recipePreview" :recipe="r" />
@@ -114,6 +123,16 @@ export default {
         this.form.diet = "";
         this.form.intolerance = "";
     },
+    TimeSort() {
+      this.search_results.sort((recipe_1, recipe_2) => {
+          return recipe_1.readyInMinutes - recipe_2.readyInMinutes;
+        });
+    },
+    PopularitySort() {
+      this.search_results.sort((recipe_1, recipe_2) => {
+          return recipe_2.aggregateLikes - recipe_1.aggregateLikes;
+        });
+    },
     SearchAction()
     {
       if(!this.is_query)
@@ -158,11 +177,17 @@ h1{
   cursor: pointer;
   flex-direction: row;
   margin: 5px auto;
+  margin-bottom: 15px;
 }
 
 .search_button:hover
 {
   transform: translateY(-2px);
+}
+
+.sort_button
+{
+   margin: 5px auto; 
 }
 
 .error_search
@@ -173,7 +198,8 @@ h1{
 {
   justify-content: center;
   display: flex;
-  width: 40%
+  width: 21%;
+  margin: 5px auto;
 }
 
 .search_filters
