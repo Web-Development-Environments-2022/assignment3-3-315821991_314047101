@@ -3,7 +3,7 @@
     <h1 class="title">Search for our recipes..</h1>
 
       <div class="input-query">
-        <input size="50" type="text" placeholder="What would you like to search?" v-model="LastQuery" required @keyup="SearchAction">
+        <input size="50" type="text" placeholder="What recipes would you like to explore?" v-model="LastQuery" required @keyup="SearchAction">
       </div>
       <div v-if="!this.is_query" class="error_search">
         <p>You must eneter a query..</p>
@@ -24,7 +24,6 @@
 
       <b-button class="reset_button" variant="outline-info" @click="onReset">Reset Filters</b-button>
       <div class="search_button" @click="onSearch"> <img src="../assets/search_icon.png" width="25" height="25" ></div>
-
   </div>
 </template>
 
@@ -39,10 +38,10 @@ export default {
   data() {
     return {
       search_results: [],
-      cuisine_options: [],
-      diet_options: [],
+      cuisine_options: [{ value: "", text: 'Cusine', disabled: true}],
+      diet_options: [{ value: "", text: 'Diet', disabled: true}],
       number_options: [5, 10, 15],
-      intolerance_options: [],
+      intolerance_options: [{ value: "", text: 'Intolerance', disabled: true}],
       form: {
         results_number: 5,
         cuisine: "",
@@ -60,9 +59,9 @@ export default {
         response = await this.axios.get(
         this.$root.store.server_domain + "/recipes/search_filtering_options", { withCredentials: true });
         if (response.status !== 200) this.$router.replace("/NotFound");
-        this.cuisine_options = response.data[0][0].split(",");
-        this.diet_options = response.data[1][0].split(",");
-        this.intolerance_options = response.data[2][0].split(",");
+        this.cuisine_options.push(...response.data[0][0].split(","));
+        this.diet_options.push(...response.data[1][0].split(","));
+        this.intolerance_options.push(...response.data[2][0].split(","));
       } catch (error) {
         console.log("error.response.status", error.response.status);
         this.$router.replace("/NotFound");
@@ -139,7 +138,7 @@ h1{
 {
   display: flex;
   justify-content: center;
-  margin: 0 0 20px;
+  margin: 0 0 10px;
   cursor: pointer;
 }
 
