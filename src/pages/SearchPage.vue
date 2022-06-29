@@ -28,10 +28,16 @@
       </div>
 
       <b-row v-if="this.is_search_return">
-      <b-col v-for="r in search_results" :key="r.id">
-        <RecipePreview style="width: 270px; height:273px; text-align:center;"  class="recipePreview" :recipe="r" />
-      </b-col>
-    </b-row>
+        <b-col v-for="r in search_results" :key="r.id">
+          <RecipePreview style="width: 270px; height:273px; text-align:center;"  class="recipePreview" :recipe="r" />
+        </b-col>
+      </b-row>
+
+      <div v-if="this.is_search_return">
+            <div class="center_error" v-if="search_results.length==0">
+              <h2>Unfortunately we do not have any result matching to your search...<br>Please try again</h2>
+          </div>
+      </div>
   </div>
 </template>
 
@@ -180,7 +186,12 @@ h1{
   display: flex;
   flex-direction: row;
 }
-
+.center_error
+{
+  display: flex;
+  justify-content: center;
+  font-size: 20px;
+}
 .title
 {
   margin: 0 0 20px;
@@ -196,4 +207,12 @@ h1{
   transform: translateY(-2px);
 }
 
+h2{
+    text-align:center;
+    color: rgb(182, 99, 22);
+    font-family:'Gill Sans', 'Gill Sans MT';
+    font-size: 20px;
+    padding: 20px;
+    margin: 0 0 20px;
+}
 </style>
