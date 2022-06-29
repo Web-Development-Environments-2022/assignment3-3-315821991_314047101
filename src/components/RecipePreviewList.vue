@@ -1,8 +1,9 @@
 <template>
   <b-container>
     <h3>
-      {{ title }}
-  
+      <h1>{{ title }}</h1>
+      
+
     
       <b-col>
       <b-row  v-for="r in recipes" :key="r.id">
@@ -93,5 +94,12 @@ h4{
 
 }
 
-
+h1
+{
+    text-align:center; 
+    color: rgb(182, 99, 22);
+    font-family:'Gill Sans', 'Gill Sans MT';
+    background-color: rgb(245, 234, 212);
+    padding: 20px; 
+}
 </style>
