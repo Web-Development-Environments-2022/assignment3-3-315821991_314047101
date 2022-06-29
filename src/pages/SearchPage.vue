@@ -3,7 +3,10 @@
     <h1 class="title">Search for our recipes..</h1>
 
       <div class="input-query">
-        <input size="50" type="text" placeholder="What would you like to search?" v-model="LastQuery">
+        <input size="50" type="text" placeholder="What would you like to search?" v-model="LastQuery" required @keyup="SearchAction">
+      </div>
+      <div v-if="!this.is_query" class="error_search">
+        <p>You must eneter a query..</p>
       </div>
       
       <div class="search_filters">
@@ -48,6 +51,7 @@ export default {
         submitError: undefined
       },
       LastQuery: sessionStorage.getItem("LastQuery"),
+      is_query: true,
     };
   },
   async created() {
@@ -72,6 +76,12 @@ export default {
     },
     async onSearch() {
       let response;
+      if(this.LastQuery == null || this.LastQuery == undefined || this.LastQuery == "")
+      {
+        this.is_query = false;
+        return;
+      }
+      this.is_query = true;
       try {
         response = await this.axios.get(
           this.$root.store.server_domain + "/recipes/search?query=" + this.LastQuery + "&number=" + this.form.results_number
@@ -83,33 +93,24 @@ export default {
         return;
       }
       console.log(response)
-
     },
     onReset() {
         this.form.results_number = 5;
         this.form.cuisine = "";
         this.form.diet = "";
         this.form.intolerance = "";
+    },
+    SearchAction()
+    {
+      if(!this.is_query)
+      {
+        if(this.LastQuery != "")
+        {
+          this.is_query = true;
+        }
+      }
     }
     }
-  
-  // validations: {
-  //   form: {
-  //     query: {
-  //       required,
-  //       alpha
-  //     },
-  //     cuisine: {
-  //       required
-  //     }
-  //   }
-  // },
-  // methods: {
-  //   validateState(param) {
-  //     const { $dirty, $error } = this.$v.form[param];
-  //     return $dirty ? !$error : null;
-  //   },
-  // }
 };
 </script>
 <style lang="scss" scoped>
@@ -142,6 +143,10 @@ h1{
   justify-content: center;
 }
 
+.error_search
+{
+  color: red;
+}
 .options
 {
   justify-content: center;
