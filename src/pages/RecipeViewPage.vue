@@ -1,5 +1,8 @@
 <template>
   <div class="container">
+    <div class="need_login_div" v-if="!$root.store.username">
+    <router-link class="need_login" to="/login" tag="button">Login to view this page</router-link>
+    </div>
     <div v-if="recipe">
       <div class="recipe-header mt-3 mb-4">
         <h1>{{ recipe.title }}</h1>
@@ -93,6 +96,10 @@ export default {
   },
   async created() {
     try {
+      if(!this.$root.store.username)
+      {
+        return;
+      }
       let recipe_id = this.$route.params.recipeId
       let response;
       let favorite_response;
@@ -195,7 +202,22 @@ h1{
   cursor: pointer;
 }
 
-/* .recipe-header{
+.need_login{
+  background-color: rgb(245, 234, 212);
+  border-color: gray;
+  box-shadow: 0 10px 15px 0 rgba(0,0,0,0.24), 0 30px 50px 0 rgba(0,0,0,0.19);
+}
 
-} */
+.need_login:hover
+{
+  transform: translateY(2px);
+  box-shadow: 0 30px 30px 0 rgba(0,0,0,0.24), 0 30px 50px 0 rgba(0,0,0,0.19);
+}
+
+.need_login_div
+{
+  margin-top: 5%;
+  justify-content: center;
+  display: flex;
+}
 </style>

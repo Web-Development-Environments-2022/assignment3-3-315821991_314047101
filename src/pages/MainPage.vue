@@ -8,7 +8,7 @@
    <div>
     <h2 class="subTitles">
       <h1   class="title">Last Viewed Recipes</h1>
-      <router-link v-if="!$root.store.username" to="/login" tag="button">You need to Login to view this</router-link>
+      <router-link class="need_login" v-if="!$root.store.username" to="/login" tag="button">Login to view this page</router-link>
        <b-container v-else>
                 <div v-if="recipes.length==0" class="center_div">
                     You have not yet viewed any recipes on our website...
@@ -87,6 +87,20 @@ h2
     padding: 20px;
     margin: 20px 0 10px;
     height: 500px;
+}
+
+.need_login{
+  background-color: rgb(182, 99, 22);
+  border-color: gray;
+  color: white;
+  box-shadow: 0 10px 15px 0 rgba(0,0,0,0.24), 0 30px 50px 0 rgba(0,0,0,0.19);
+  font-size: 20px;
+}
+
+.need_login:hover
+{
+  transform: translateY(2px);
+  box-shadow: 0 30px 30px 0 rgba(0,0,0,0.24), 0 30px 50px 0 rgba(0,0,0,0.19);
 }
 
 .center_div {
