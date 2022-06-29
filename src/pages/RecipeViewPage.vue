@@ -16,9 +16,7 @@
             Ingredients:
             <ul>
               <li
-                v-for="(r, index) in recipe.extendedIngredients"
-                :key="index + '_' + r.id"
-              >
+                v-for="(r, index) in recipe.extendedIngredients" :key="index + '_' + r.id">
                 {{ r.original }}
               </li>
             </ul>
@@ -35,19 +33,16 @@
               </div>
             <br>
             Instructions:
-            <ol>
-              <li v-for="s in recipe._instructions" :key="s.number">
-                {{ s.step }}
-              </li>
-            </ol>
+              <div v-for="(name, index) in recipe._instructions_names" :key="name">
+                 <div v-if="name"> {{ name }} </div>
+                <br>
+                <ol> <div>
+                  <li v-for="s in recipe._instructions[index]" :key="s.number">{{ s.step }}</li>
+                </div></ol>
+              </div>
           </div>
         </div>
       </div>
-      <!-- <pre>
-      {{ $route.params }}
-      {{ recipe }}
-    </pre
-      > -->
     </div>
   </div>
 </template>
@@ -139,13 +134,17 @@ export default {
       } = response.data;
       let _instructions = analyzedInstructions
         .map((fstep) => {
-          fstep.steps[0].step = fstep.name + fstep.steps[0].step;
           return fstep.steps;
-        })
-        .reduce((a, b) => [...a, ...b], []);
+        });
+
+      let _instructions_names = analyzedInstructions
+        .map((fstep) => {
+          return fstep.name;
+        });
 
       let _recipe = {
         _instructions,
+        _instructions_names,
         analyzedInstructions,
         extendedIngredients,
         aggregateLikes,
