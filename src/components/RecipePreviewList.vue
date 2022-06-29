@@ -58,6 +58,7 @@ export default {
 };
 </script>
 
+
 <style lang="scss" scoped>
 .container {
   min-height: 400px;
@@ -68,22 +69,12 @@ h3
     color: rgb(182, 99, 22);
     font-family:'Gill Sans', 'Gill Sans MT';
     background-color: rgb(245, 234, 212);
-    padding: 10px;
-}
-h4{
-  //position: absolute;
- // left: 40px;
- // width: 300px;
-  height: 200px;
-  padding: 350px;
-
- 
+    padding: 7px;
 }
 
 .random_btn:hover
 {
   box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
-
 }
 
 .random_btn:active
