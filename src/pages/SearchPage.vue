@@ -26,17 +26,23 @@
       <div class="search_button">
       <div @click="onSearch"> <img src="../assets/search_icon.png" width="25" height="25" ></div>
       </div>
+
+      <b-row v-if="this.is_search_return">
+      <b-col v-for="r in search_results" :key="r.id">
+        <RecipePreview style="width: 270px; height:273px; text-align:center;"  class="recipePreview" :recipe="r" />
+      </b-col>
+    </b-row>
   </div>
 </template>
 
 <script>
-// import {
-//   required,
-//   alpha,
-// } from "vuelidate/lib/validators";
+import RecipePreview from "../components/RecipePreview.vue";
 
 export default {
   name: "Search",
+  components: {
+    RecipePreview
+  },
   data() {
     return {
       search_results: [],
@@ -53,6 +59,7 @@ export default {
       },
       LastQuery: sessionStorage.getItem("LastQuery"),
       is_query: true,
+      is_search_return: false,
     };
   },
   async created() {
@@ -76,6 +83,7 @@ export default {
       return $dirty ? !$error : null;
     },
     async onSearch() {
+      this.is_search_return = false;
       let response;
       if(this.LastQuery == null || this.LastQuery == undefined || this.LastQuery == "")
       {
@@ -93,7 +101,10 @@ export default {
         this.$router.replace("/NotFound");
         return;
       }
-      console.log(response)
+      this.is_search_return = true;
+      const recipes = response.data;
+      this.search_results = [];
+      this.search_results.push(...recipes);
     },
     onReset() {
         this.form.results_number = 5;
