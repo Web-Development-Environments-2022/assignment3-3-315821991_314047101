@@ -33,7 +33,7 @@
       
       <b-row v-if="this.is_search_return">
         <b-col v-for="r in search_results" :key="r.id">
-          <RecipePreview style="width: 270px; height:273px; text-align:center;"  class="recipePreview" :recipe="r" />
+          <RecipePreview style="width: 450px; height:273px; text-align:center;"  class="recipePreview" :recipe="r" />
         </b-col>
       </b-row>
 
@@ -183,11 +183,6 @@ h1{
 .search_button:hover
 {
   transform: translateY(-2px);
-}
-
-.sort_button
-{
-   margin: 5px auto; 
 }
 
 .error_search
