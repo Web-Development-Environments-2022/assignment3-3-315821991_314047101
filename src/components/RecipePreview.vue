@@ -8,7 +8,7 @@
       <div style="text-align:center" :title="recipe.title" class="recipe-title">
       {{ recipe.title }}
       </div>
-      <img v-if="!flag" class="button" src="../assets/not_favorite_icon.png" width="25" height="25" >
+        <img v-if="!flag" class="button" src="../assets/not_favorite_icon.png" width="25" height="25" >
         <img v-if="flag" class="button" src="../assets/favorite_icon.png" width="25" height="25" >
         <img v-if="recipe.vegetarian==true || recipe.vegetarian==='true'" src="../assets/vegetarian_icon.png" width="25" height="25" >
         <img v-if="recipe.vegan==true ||recipe.vegan==='true'" src="../assets/vegan_icon.png" width="25" height="25" >
@@ -17,7 +17,6 @@
       <ul class="recipe-overview" >
         <li>{{ recipe.readyInMinutes }} minutes</li>
         <li>{{ recipe.aggregateLikes }} likes</li>
-      
       </ul>
     </div>
   </router-link>
@@ -46,6 +45,10 @@ export default {
     {
       this.path_name = 'personal_recipe_view';
     }
+    if(!this.$root.store.username)
+    {
+      return;
+    }
     try {
       let favorite_response;
       try {
@@ -73,7 +76,7 @@ export default {
           this.$root.store.server_domain + "/recipes/getAllHistory", { withCredentials: true });
         if (is_seen_recipe.status !== 200) this.$router.replace("/NotFound");
       } catch (error) {
-        console.log("error.is_seen_recipe.status", error.favorite_response.status);
+        console.log("error.is_seen_recipe.status", error.is_seen_recipe.status);
         this.$router.replace("/NotFound");
         return;
       }

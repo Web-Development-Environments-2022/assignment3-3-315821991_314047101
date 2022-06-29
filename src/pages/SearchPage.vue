@@ -10,14 +10,9 @@
       </div>
       
       <div class="search_filters">
-        <!-- <p>How many results would you like to recieve?:</p> -->
         <b-form-select class="options" v-model="form.results_number" :options="number_options"></b-form-select><br>
-        <!-- <p>Filter results by:</p>
-        <p>cuisine:</p> -->
         <b-form-select class="options" v-model="form.cuisine" :options="cuisine_options"></b-form-select><br>
-        <!-- <p>diet:</p> -->
         <b-form-select class="options" v-model="form.diet" :options="diet_options"></b-form-select><br>
-        <!-- <p>intolerance:</p> -->
         <b-form-select class="options" v-model="form.intolerance" :options="intolerance_options"></b-form-select>
       </div>
       <br>
