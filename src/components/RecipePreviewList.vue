@@ -1,14 +1,16 @@
 <template>
   <b-container>
     <h3>
-      {{ title }}:
-      <slot></slot>
-    </h3>
-    <b-row>
-      <b-col v-for="r in recipes" :key="r.id">
-        <RecipePreview style="width: 270px; height:273px; text-align:center;"  class="recipePreview" :recipe="r" />
-      </b-col>
-    </b-row>
+      {{ title }}
+  
+    
+      <b-col>
+      <b-row  v-for="r in recipes" :key="r.id">
+        <RecipePreview style="width: 400px; height:300px; text-align:center;"  class="recipePreview" :recipe="r" />
+        </b-row>
+     
+     </b-col>
+      </h3>
     <h4>
       <b-button class="random_btn" pill variant="info" @click="updateRecipes">More recieps</b-button>
     </h4>
@@ -61,7 +63,8 @@ export default {
 
 <style lang="scss" scoped>
 .container {
-  min-height: 400px;
+  max-height: 100px;
+  max-width: 400px;
 }
 h3
 {
@@ -69,17 +72,25 @@ h3
     color: rgb(182, 99, 22);
     font-family:'Gill Sans', 'Gill Sans MT';
     background-color: rgb(245, 234, 212);
-    padding: 7px;
+    padding: 10px;
+    
+
+}
+h4{
+  padding: 60px;
+
 }
 
 .random_btn:hover
 {
+
   box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 }
 
 .random_btn:active
 {
   transform: translateY(1px);
+
 }
 
 
